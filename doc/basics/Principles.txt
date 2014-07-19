@@ -2,3 +2,7 @@ Principles
 
 1. Client never fetches anything in advance!
 
+	example 1: getting translations (if not cached) one by one
+	example 2: getting meta definitions (if not cached)
+	example 3: getting view definitions when needed
+	
