@@ -6,8 +6,9 @@ Each translation is represented by a small java object, same as any entity.
 
 class Word {
 
-	public String getKey();
-	public String getLocale();
-	public String getValue();
+	public String key;
+	
+	@SessionLocale
+	public String value;
 	
 }
