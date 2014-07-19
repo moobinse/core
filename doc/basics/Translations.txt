@@ -1,0 +1,13 @@
+Translation
+
+There is at least one translation file for each language.
+
+Each translation is represented by a small java object, same as any entity.
+
+class Word {
+
+	public String getKey();
+	public String getLocale();
+	public String getValue();
+	
+}
