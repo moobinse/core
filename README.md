@@ -1,4 +1,0 @@
-core
-====
-
-first steps
