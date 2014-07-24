@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<populate>
+		<resource type="csv" p:file="test.csv"/>
+		<resource type="xml" p:file="test.xml"/>
+		<resource type="te" p:server="127.0.0.1:3200"/>
+	</populate>
+</root>
