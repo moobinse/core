@@ -1,20 +1,10 @@
 package com.moobin.meta.test;
 
-import java.util.function.Function;
 
-import com.moobin.meta.ObjectMetaData;
+public class ObjectMetaDataUser extends MetaDataObjectImpl<TestUser> {
 
-public class ObjectMetaDataUser implements ObjectMetaData<User> {
-	
-	@Override
-	public Function<User, String> getKey() {
-		return (user) -> user.name;
+	public ObjectMetaDataUser() {
+		super(TestUser.class, (u) -> u.userId, (u) -> u.name);
 	}
-	
-	@Override
-	public Function<User, String> getText() {
-		return (user) -> user.name;
-	}
-	
 
 }

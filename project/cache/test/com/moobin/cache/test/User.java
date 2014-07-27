@@ -2,19 +2,19 @@ package com.moobin.cache.test;
 
 import java.util.function.Function;
 
-import com.moobin.meta.ObjectMetaData;
+import com.moobin.meta.MetaDataObject;
 
 public class User {
 	
-	static ObjectMetaData<User> metaData = new ObjectMetaData<User>() {
+	static MetaDataObject<User> metaData = new MetaDataObject<User>() {
 		
 		@Override
-		public Function<User, String> getKey() {
+		public Function<User, String> keyFunction() {
 			return (user) -> user.name;
 		}
 		
 		@Override
-		public Function<User, String> getText() {
+		public Function<User, String> displayFunction() {
 			return (user) -> user.name;
 		}
 	};

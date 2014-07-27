@@ -1,9 +1,10 @@
 package com.moobin.meta.test;
 
-public class User {
+import com.moobin.annotation.Display;
+import com.moobin.annotation.Id;
+import com.moobin.annotation.Unique;
 
-	public String userId;
+public class User {
 	
-	public String name;
 	
 }

@@ -7,7 +7,7 @@ import com.moobin.cache.impl.CacheMap;
 public class MapTest {
 
 
-	CacheMap<User> map = new CacheMap((u) -> true, User.metaData.getText());
+	CacheMap<User> map = new CacheMap((u) -> true, User.metaData.displayFunction());
 	
 	void test() {
 		map.add(new User("u2", "aued"));
