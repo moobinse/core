@@ -2,7 +2,6 @@ package com.moobin.input.js;
 
 import com.moobin.core.Core;
 import com.moobin.meta.MetaDataField;
-import com.moobin.meta.MetaDataField.Type;
 import com.moobin.meta.MetaDataObject;
 
 public abstract class MFormat<T> {
@@ -25,10 +24,10 @@ public abstract class MFormat<T> {
 	
 	protected void format() {
 		openObject();
-		meta.getFields((f) -> f.getType() == Type.SIMPLE).forEach(this::addSimple);
-		meta.getFields((f) -> f.getType() == Type.OBJECT).forEach(this::addObject);
-		meta.getFields((f) -> f.getType() == Type.SIMPLE_ARRAY).forEach(this::addSimpleArray);
-		meta.getFields((f) -> f.getType() == Type.OBJECT_ARRAY).forEach(this::addObjectArray);
+		meta.getSimpleFields().forEach(this::addSimple);
+		meta.getObjectFields().forEach(this::addObject);
+		meta.getSimpleArrayFields().forEach(this::addSimpleArray);
+		meta.getObjectArrayFields().forEach(this::addObjectArray);
 		closeObject();
 	}
 	

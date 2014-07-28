@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moobin>
+	
+	<Country xpath="//CcyTbl/CcyNtry">
+		<name xpath="CtryNm"/>
+		<currencyCode xpath="Ccy"/>
+		<currencyNumber xpath="CcyNbr"/>
+	</Country>
+	
+	<entity name="Currency" xpath="//CcyTbl/CcyNtry">
+		<text name="name" xpath="CcyNm"/>
+		<text name="code" xpath="Ccy"/>
+		<number name="nbr" min="0" max="1000" xpath="CcyNbr"/>
+		<number name="units" xpath="CcyMnrUnts"/>
+	</entity>
+	
+	<resource xml="currency.xml" xsl="input.xsl"/>
+	
+</moobin>

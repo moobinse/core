@@ -8,9 +8,13 @@ import java.lang.annotation.Target;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.TYPE})
-public @interface ReadOnly {
+@Target(ElementType.FIELD)
+public @interface BtNumber {
 
-	boolean value() default true;
-	
+	long min() default Integer.MIN_VALUE;
+
+	long max() default Integer.MAX_VALUE;
+
+	long step() default 1; 
+
 }

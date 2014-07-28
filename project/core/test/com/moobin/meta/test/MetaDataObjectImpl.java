@@ -2,7 +2,6 @@ package com.moobin.meta.test;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataObject;
@@ -35,11 +34,46 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	}
 
 	@Override
-	public List<MetaDataField<?, T>> getFields(
-			Predicate<MetaDataField<?, ?>> filter) {
+	public String getName() {
+		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public MetaDataField<?, T> getKeyField() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public MetaDataField<String, T> getDisplayField() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MetaDataField<?, T>> getSimpleFields() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MetaDataField<?, T>> getSimpleArrayFields() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MetaDataField<?, T>> getObjectFields() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MetaDataField<?, T>> getObjectArrayFields() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 }

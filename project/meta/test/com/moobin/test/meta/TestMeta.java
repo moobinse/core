@@ -4,7 +4,6 @@ import com.moobin.core.Core;
 import com.moobin.meta.MetaDataManager;
 import com.moobin.meta.MetaDataManagerImpl;
 import com.moobin.meta.MetaDataObject;
-import com.moobin.meta.test.TestItem;
 
 public class TestMeta {
 

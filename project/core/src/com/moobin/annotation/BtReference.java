@@ -8,9 +8,9 @@ import java.lang.annotation.Target;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.TYPE})
-public @interface ReadOnly {
+@Target(ElementType.FIELD)
+public @interface BtReference {
 
-	boolean value() default true;
-	
+	Class<? extends Object> value();
+
 }

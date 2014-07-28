@@ -1,6 +1,6 @@
 package com.moobin.meta.test;
 
-import com.moobin.annotation.Display;
+import com.moobin.annotation.BtDisplay;
 import com.moobin.annotation.Id;
 
 public class TestMember {
@@ -8,7 +8,7 @@ public class TestMember {
 	@Id
 	public String memberId;
 	
-	@Display
+	@BtDisplay
 	public String memberName;
 
 }

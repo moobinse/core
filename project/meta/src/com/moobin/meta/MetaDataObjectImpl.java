@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import com.moobin.annotation.Display;
+import com.moobin.annotation.BtDisplay;
 import com.moobin.annotation.Id;
 import com.moobin.core.Core;
 
@@ -47,7 +47,7 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 			assert keyField == null;
 			keyField = meta;
 		}
-		if (field.getAnnotation(Display.class) != null) {
+		if (field.getAnnotation(BtDisplay.class) != null) {
 			assert displayField == null;
 			displayField = (MetaDataField<String, T>) meta;
 		}

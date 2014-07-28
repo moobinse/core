@@ -5,9 +5,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
+import com.moobin.annotation.BtDecimal;
+import com.moobin.annotation.BtNumber;
+import com.moobin.annotation.BtReference;
+import com.moobin.annotation.BtText;
 import com.moobin.annotation.Required;
 import com.moobin.annotation.Unique;
 import com.moobin.core.MoobinException;
+import com.moobin.meta.bt.MetaDecimal;
+import com.moobin.meta.bt.MetaEnum;
+import com.moobin.meta.bt.MetaNumber;
+import com.moobin.meta.bt.MetaReference;
+import com.moobin.meta.bt.MetaText;
 
 public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 
@@ -17,9 +26,13 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 	private boolean unique;
 	private boolean array;
 	private boolean required;
+	private MetaBusinessType<?> businessType;
 	
 	private Class<?> javaType;
 	private Field field;
+
+	private static final List<Class<?>> numberTypes = Arrays.asList(Integer.class, int.class, Long.class, long.class, Byte.class, byte.class, Short.class, short.class);
+	private static final List<Class<?>> decimalTypes = Arrays.asList(Double.class, double.class, Float.class, float.class);
 	
 	static List<Class<?>> simpleTypes = Arrays.asList(
 			String.class, 
@@ -27,6 +40,7 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 			int.class, Integer.class,
 			long.class, Long.class);
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	MetaDataFieldImpl(MetaDataObject<T> parent, Field field) {
 		this.field = field;
 		objectName = parent.getName();
@@ -42,6 +56,42 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 		else {
 			type = array ? Type.OBJECT_ARRAY : Type.OBJECT;
 		}
+		// find business type
+		BtNumber numberAnnotation = field.getAnnotation(BtNumber.class);
+		BtText textAnnotation = field.getAnnotation(BtText.class);
+		BtDecimal decimalAnnotation = field.getAnnotation(BtDecimal.class);
+		BtReference referenceAnnotation = field.getAnnotation(BtReference.class);
+		// TODO: test for multiple business type annotations
+		if (numberAnnotation != null) {
+			setBusinessType(new MetaNumber(this, numberAnnotation));
+		}
+		else if (decimalAnnotation != null) {
+			setBusinessType(new MetaDecimal(this, decimalAnnotation));
+		}
+		else if (textAnnotation != null) {
+			setBusinessType(new MetaText((MetaDataField<String, ?>) this, textAnnotation));
+		}
+		else if (referenceAnnotation != null) {
+			setBusinessType(new MetaReference(this, referenceAnnotation));
+		}
+		else if (numberTypes.contains(javaType)) {
+			setBusinessType(new MetaNumber(this));
+		}
+		else if (decimalTypes.contains(javaType)) {
+			setBusinessType(new MetaDecimal(this));
+		}
+		else if (javaType == String.class) {
+			setBusinessType(new MetaText((MetaDataField<String, ?>) this));
+		}
+		else if (Enum.class.isAssignableFrom(javaType)) {
+			setBusinessType(new MetaEnum(this));
+		}
+		System.out.println(this);
+	}
+	
+	private void setBusinessType(MetaBusinessType<?> businessType) {
+		assert this.businessType == null;
+		this.businessType = businessType;
 	}
 	
 	@Override
@@ -92,7 +142,7 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 	
 	@Override
 	public String toString() {
-		return objectName + "." + fieldName + "[" + javaType + "]";
+		return objectName + "." + fieldName + "[" + businessType + "]";
 	}
 
 }
