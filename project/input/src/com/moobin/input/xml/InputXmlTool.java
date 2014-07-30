@@ -68,7 +68,7 @@ public class InputXmlTool {
 			if (nodes.getLength() == 0) {
 				return Collections.EMPTY_LIST;
 			}
-			List<Element> elements = new ArrayList();
+			List<Element> elements = new ArrayList<Element>();
 			for (int i = 0; i < nodes.getLength(); i++) {
 				elements.add((Element) nodes.item(i));
 			}

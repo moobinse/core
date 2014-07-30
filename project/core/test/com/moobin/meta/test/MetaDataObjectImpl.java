@@ -1,11 +1,8 @@
 package com.moobin.meta.test;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.function.Function;
 
-import com.moobin.core.MoobinException;
 import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataObject;
 
@@ -20,7 +17,11 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 		this.keyFunction = key;
 		this.textFunction = text;
 	}
-
+	
+	public Class<T> getClazz() {
+		return clazz;
+	}
+	
 	@Override
 	public T create() {
 		// TODO Auto-generated method stub

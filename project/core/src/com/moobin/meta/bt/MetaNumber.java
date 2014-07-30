@@ -1,8 +1,5 @@
 package com.moobin.meta.bt;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.moobin.annotation.BtNumber;
 import com.moobin.meta.MetaDataField;
 

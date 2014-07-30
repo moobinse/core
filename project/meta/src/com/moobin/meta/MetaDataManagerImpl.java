@@ -4,19 +4,16 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import com.moobin.annotation.BtDecimal;
 import com.moobin.annotation.BtNumber;
 import com.moobin.annotation.BtText;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class MetaDataManagerImpl implements MetaDataManager {
 
 	private Map<Class<?>, MetaDataObject<?>> classMap = new HashMap<Class<?>, MetaDataObject<?>>();
@@ -26,7 +23,6 @@ public class MetaDataManagerImpl implements MetaDataManager {
 	private List<Class<? extends Annotation>> businessTypeAnnotations = 
 			Arrays.asList(BtNumber.class, BtText.class, BtDecimal.class);
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> MetaDataObject<T> getMetaData(Class<T> pType) {
 		return (MetaDataObject<T>) classMap.get(pType);
@@ -43,13 +39,11 @@ public class MetaDataManagerImpl implements MetaDataManager {
 		metaDataObjectConstructor  = function;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <T> MetaDataObject<T> createMetaDataObject(Class<T> clazz) {
 		return metaDataObjectConstructor.apply(clazz);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public <F,T> MetaDataField<F,T> createFieldMetaData(MetaDataObject<T> meta, Field field) {
 		return metaDataFieldConstructor.apply(meta, field);

@@ -14,6 +14,7 @@ import com.moobin.core.Core;
 import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataObject;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class XmlInputMapping<T> {
 
 	private static Map<Class<?>, XmlInputMapping<?>> map = new HashMap();
@@ -24,12 +25,10 @@ public class XmlInputMapping<T> {
 
 	private class FieldMapping {
 
-		final String name;
 		final String xpath;
 		final MetaDataField<?, T> metaField;
 		
 		public FieldMapping(String field, String xpath) {
-			this.name = field;
 			this.xpath = xpath;
 			this.metaField = meta.getField(field);
 		}
@@ -84,7 +83,6 @@ public class XmlInputMapping<T> {
 		return new XmlInputMapping<T>(type, xpath);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static <T> XmlInputMapping<T> get(Class<T> type) {
 		return (XmlInputMapping<T>) map.get(type);
 	}

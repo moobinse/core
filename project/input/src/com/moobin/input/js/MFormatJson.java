@@ -41,6 +41,7 @@ public class MFormatJson<T> extends MFormat<T> {
 	void addSimpleArray(MetaDataField<?, T> field) {
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	void addObject(MetaDataField<?, T> field) {
 		builder.append(field.getName()).append(':');
