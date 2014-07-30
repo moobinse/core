@@ -131,7 +131,24 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 		try {
 			return (F) field.get(item);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
-			throw new MoobinException();
+			throw new MoobinException(e);
+		}
+	}
+
+	@Override
+	public void set(T item, String value) {
+		if (value == null) {
+			return;
+		}
+		try {
+			if (field.getType() == String.class) {
+				field.set(item, value);
+			}
+			if (field.getType() == Integer.class || field.getType() == int.class) {
+				field.set(item, Integer.valueOf(value));
+			}
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw new MoobinException(e);
 		}
 	}
 

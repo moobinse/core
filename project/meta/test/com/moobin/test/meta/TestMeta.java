@@ -14,6 +14,7 @@ public class TestMeta {
 	public static void main(String[] args) {
 		MetaDataManager metaManager = Core.get().getMetaDataManager();
 		metaManager.add(TestItem.class);
+		metaManager.add(Currency.class);
 		MetaDataObject<TestItem> meta = metaManager.getMetaData(TestItem.class);
 		System.out.println(meta.getName());
 		meta.getFields().forEach(System.out::println);

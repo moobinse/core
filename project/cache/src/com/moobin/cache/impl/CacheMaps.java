@@ -8,7 +8,7 @@ public class CacheMaps {
 	
 	private Map<Class<?>, CacheSubMaps<?>> cacheSubMaps = new HashMap<Class<?>, CacheSubMaps<?>>();
 	
-	<T> CacheMap<T> get(Class<T> type) {
+	public <T> CacheMap<T> get(Class<T> type) {
 		return get(type, null);
 	}
 
@@ -17,7 +17,7 @@ public class CacheMaps {
 	 * @param type
 	 * @return
 	 */
-	<T> CacheMap<T> create(Class<T> type) {
+	public <T> CacheMap<T> create(Class<T> type) {
 		return createSubMaps(type).create(null);
 	}
 	

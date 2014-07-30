@@ -15,6 +15,8 @@ public interface MetaDataObject<T> {
 
 	Function<T, String> displayFunction();
 
+	MetaDataField<?, T> getField(String field);
+	
 	List<MetaDataField<?,T>> getFields();
 
 	List<MetaDataField<?,T>> getSimpleFields();
@@ -24,5 +26,7 @@ public interface MetaDataObject<T> {
 	List<MetaDataField<?,T>> getObjectFields();
 	
 	List<MetaDataField<?,T>> getObjectArrayFields();
+
+	T create();
 	
 }

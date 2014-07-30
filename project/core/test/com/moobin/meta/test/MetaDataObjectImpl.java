@@ -1,21 +1,30 @@
 package com.moobin.meta.test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.function.Function;
 
+import com.moobin.core.MoobinException;
 import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataObject;
 
 public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 
-	Function<T, String> keyFunction;
-	Function<T, String> textFunction;
-	Class<T> clazz;
+	private Function<T, String> keyFunction;
+	private Function<T, String> textFunction;
+	private Class<T> clazz;
 
 	public MetaDataObjectImpl(Class<T> clazz, Function<T, String> key, Function<T, String> text) {
 		this.clazz = clazz;
 		this.keyFunction = key;
 		this.textFunction = text;
+	}
+
+	@Override
+	public T create() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Override
@@ -28,6 +37,11 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 		return textFunction;
 	}
 
+	@Override
+	public MetaDataField<?, T> getField(String field) {
+		return null;
+	}
+	
 	@Override
 	public List<MetaDataField<?, T>> getFields() {
 		return null;

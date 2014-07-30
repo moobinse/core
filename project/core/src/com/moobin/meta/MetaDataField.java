@@ -23,6 +23,7 @@ public interface MetaDataField<F,T> {
 	}
 	
 	F get(T item);
-
+	
+	void set(T item, String value);
 
 }

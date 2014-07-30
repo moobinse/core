@@ -1,6 +1,8 @@
 package com.moobin.meta;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +14,7 @@ import java.util.function.Function;
 import com.moobin.annotation.BtDisplay;
 import com.moobin.annotation.Id;
 import com.moobin.core.Core;
+import com.moobin.core.MoobinException;
 
 public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 
@@ -24,10 +27,16 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	private List<MetaDataField<?, T>> simpleArrayFields = new ArrayList<MetaDataField<?,T>>();
 	private List<MetaDataField<?, T>> objectArrayFields = new ArrayList<MetaDataField<?,T>>();
 	private Map<String, MetaDataField<?, T>> fieldMap = new HashMap<String, MetaDataField<?,T>>();
+	private Constructor<T> constructor;
 	
 	public MetaDataObjectImpl(Class<T> clazz) {
 		name = clazz.getSimpleName();
 		Arrays.asList(clazz.getFields()).forEach(this::add);
+		try {
+			this.constructor = clazz.getConstructor();
+		} catch (NoSuchMethodException | SecurityException e) {
+			throw new MoobinException(e);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -54,10 +63,25 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	}
 
 	@Override
+	public T create() {
+		try {
+			return constructor.newInstance();
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			throw new MoobinException(e);
+		}
+	}
+
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
+	public MetaDataField<?, T> getField(String field) {
+		return fieldMap.get(field);
+	}
+	
 	@Override
 	public List<MetaDataField<?, T>> getFields() {
 		return allFields;
