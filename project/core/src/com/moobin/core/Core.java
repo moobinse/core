@@ -1,6 +1,6 @@
 package com.moobin.core;
 
-import com.moobin.cache.MoobinCacheManager;
+import com.moobin.cache.MMapManager;
 import com.moobin.meta.MetaDataManager;
 
 
@@ -8,7 +8,7 @@ public interface Core {
 	
 	MetaDataManager getMetaDataManager();
 	
-	MoobinCacheManager getCacheManager();
+	MMapManager getCacheManager();
 
 	static class Managers {
 		static Core core = new Core() {
@@ -17,12 +17,12 @@ public interface Core {
 				return metaDataManager;
 			}
 			@Override
-			public MoobinCacheManager getCacheManager() {
+			public MMapManager getCacheManager() {
 				return cacheManager;
 			}
 		};
 		static MetaDataManager metaDataManager;
-		static MoobinCacheManager cacheManager;
+		static MMapManager cacheManager;
 	}
 	
 	static Core get() {
@@ -33,8 +33,8 @@ public interface Core {
 		if (manager instanceof MetaDataManager) {
 			Managers.metaDataManager = (MetaDataManager) manager;
 		}
-		if (manager instanceof MoobinCacheManager) {
-			Managers.cacheManager = (MoobinCacheManager) manager;
+		if (manager instanceof MMapManager) {
+			Managers.cacheManager = (MMapManager) manager;
 		}
 	}
 }

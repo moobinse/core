@@ -8,7 +8,7 @@ public class CacheMaps {
 	
 	private Map<Class<?>, CacheSubMaps<?>> cacheSubMaps = new HashMap<Class<?>, CacheSubMaps<?>>();
 	
-	public <T> CacheMap<T> get(Class<T> type) {
+	public <T> CacheMapImpl<T> get(Class<T> type) {
 		return get(type, null);
 	}
 
@@ -17,17 +17,17 @@ public class CacheMaps {
 	 * @param type
 	 * @return
 	 */
-	public <T> CacheMap<T> create(Class<T> type) {
-		return createSubMaps(type).create(null);
+	public <T> CacheMapImpl<T> create(Class<T> type) {
+		return createSubMaps(type).get(null);
 	}
 	
-	<T> CacheMap<T> get(Class<T> type, Predicate<T> filter) {
+	<T> CacheMapImpl<T> get(Class<T> type, Predicate<T> filter) {
 		@SuppressWarnings("unchecked")
 		CacheSubMaps<T> subMap = (CacheSubMaps<T>) cacheSubMaps.get(type);
 		return subMap == null ? null : subMap.get(filter);
 	}
 
-	<T> CacheMap<T> create(Class<T> type, Predicate<T> filter) {
+	<T> CacheMapImpl<T> create(Class<T> type, Predicate<T> filter) {
 		return createSubMaps(type).create(filter);
 	}
 	
@@ -44,22 +44,24 @@ public class CacheMaps {
 	private class CacheSubMaps<T> {
 		
 		private final Class<T> type;
-		private final HashMap<String, CacheMap<T>> map = new HashMap<String, CacheMap<T>>();
+		private final HashMap<String, CacheMapImpl<T>> map = new HashMap<String, CacheMapImpl<T>>();
 		
 		public CacheSubMaps(Class<T> type) {
 			this.type = type;
+			map.put(null, new CacheMapImpl<T>(type));
 		}
 		
-		private CacheMap<T> create(Predicate<T> filter) {
-			CacheMap<T> subMap = get(filter.toString());
+		private CacheMapImpl<T> create(Predicate<T> filter) { 
+			String key = filter.toString();
+			CacheMapImpl<T> subMap = get(key);
 			if (subMap == null) {
 				subMap = new CacheSubMap<T>(get(type), filter);
-				map.put(filter.toString(), subMap);
+				map.put(key, subMap);
 			}
 			return subMap;
 		}
 
-		public CacheMap<T> get(Object key) {
+		public CacheMapImpl<T> get(Object key) {
 			return map.get(key);
 		}
 	}

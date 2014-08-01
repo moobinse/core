@@ -1,0 +1,14 @@
+com.dictiography.collections
+com.moobin.annotation
+com.moobin.cache
+com.moobin.cache.impl
+com.moobin.cache.test
+com.moobin.core
+com.moobin.input.js
+com.moobin.input.xml
+com.moobin.meta
+com.moobin.meta.bt
+com.moobin.object
+com.moobin.test.example
+com.moobin.test.input
+com.moobin.test.meta
