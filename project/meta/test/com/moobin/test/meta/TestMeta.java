@@ -8,7 +8,7 @@ import com.moobin.meta.MetaDataObject;
 public class TestMeta {
 
 	static {
-		Core.set(new MetaDataManagerImpl());
+		Core.get().set(new MetaDataManagerImpl());
 	}
 	
 	public static void main(String[] args) {

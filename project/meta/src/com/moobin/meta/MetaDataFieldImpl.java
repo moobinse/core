@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-import com.moobin.annotation.BtDecimal;
-import com.moobin.annotation.BtNumber;
-import com.moobin.annotation.BtReference;
-import com.moobin.annotation.BtText;
 import com.moobin.annotation.Required;
 import com.moobin.annotation.Unique;
+import com.moobin.annotation.bt.BtDecimal;
+import com.moobin.annotation.bt.BtNumber;
+import com.moobin.annotation.bt.BtReference;
+import com.moobin.annotation.bt.BtText;
 import com.moobin.core.MoobinException;
 import com.moobin.meta.bt.MetaDecimal;
 import com.moobin.meta.bt.MetaEnum;

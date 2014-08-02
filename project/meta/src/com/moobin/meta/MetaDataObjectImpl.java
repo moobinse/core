@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import com.moobin.annotation.BtDisplay;
 import com.moobin.annotation.Id;
+import com.moobin.annotation.bt.BtDisplay;
 import com.moobin.core.Core;
 import com.moobin.core.MoobinException;
 
@@ -77,9 +77,10 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 		return name;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public MetaDataField<?, T> getField(String field) {
-		return fieldMap.get(field);
+	public <F> MetaDataField<F, T> getField(String field) {
+		return (MetaDataField<F, T>) fieldMap.get(field);
 	}
 	
 	@Override

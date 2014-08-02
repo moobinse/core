@@ -1,10 +1,10 @@
 package com.moobin.test.example;
 
-import com.moobin.annotation.BtDisplay;
-import com.moobin.annotation.BtNumber;
 import com.moobin.annotation.Id;
 import com.moobin.annotation.ReadOnly;
 import com.moobin.annotation.Unique;
+import com.moobin.annotation.bt.BtDisplay;
+import com.moobin.annotation.bt.BtNumber;
 
 @ReadOnly
 public class Country {

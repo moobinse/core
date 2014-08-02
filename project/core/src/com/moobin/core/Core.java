@@ -1,40 +1,28 @@
 package com.moobin.core;
 
-import com.moobin.cache.MMapManager;
+import com.moobin.cache.CacheManager;
+import com.moobin.configuration.MoobinConfiguration;
+import com.moobin.core.impl.CoreImpl;
 import com.moobin.meta.MetaDataManager;
 
 
 public interface Core {
+
+	static Core core = new CoreImpl();
+
+	MoobinConfiguration getConfiguration();
 	
 	MetaDataManager getMetaDataManager();
 	
-	MMapManager getCacheManager();
+	CacheManager getCacheManager();
 
-	static class Managers {
-		static Core core = new Core() {
-			@Override
-			public MetaDataManager getMetaDataManager() {
-				return metaDataManager;
-			}
-			@Override
-			public MMapManager getCacheManager() {
-				return cacheManager;
-			}
-		};
-		static MetaDataManager metaDataManager;
-		static MMapManager cacheManager;
-	}
+	<T> T set(T manager);
+
+	void start();
 	
 	static Core get() {
-		return Managers.core;
+		return core;
 	}
-	
-	public static void set(Object manager) {
-		if (manager instanceof MetaDataManager) {
-			Managers.metaDataManager = (MetaDataManager) manager;
-		}
-		if (manager instanceof MMapManager) {
-			Managers.cacheManager = (MMapManager) manager;
-		}
-	}
+
+
 }

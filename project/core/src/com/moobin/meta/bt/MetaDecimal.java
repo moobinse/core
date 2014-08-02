@@ -1,6 +1,6 @@
 package com.moobin.meta.bt;
 
-import com.moobin.annotation.BtDecimal;
+import com.moobin.annotation.bt.BtDecimal;
 import com.moobin.meta.MetaDataField;
 
 public class MetaDecimal<T extends Number> extends AbstractMetaBusinessType<T> {

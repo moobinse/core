@@ -1,13 +1,21 @@
 package com.moobin.cache;
 
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 
 /**
  * @author Magnus Lenti
  *
  * @param <T>
  */
-public interface MMap<T> extends SimpleCacheMap<T> {
+public interface CacheMapSorting<T> {
+
+	/**
+	 * 
+	 * @return
+	 */
+	CacheMap<T> source();
 	
 	/**
 	 * @param item
@@ -28,11 +36,15 @@ public interface MMap<T> extends SimpleCacheMap<T> {
 	 */
 	List<T> get(int from, int to);
 	
-
+	/**
+	 * 
+	 * @return
+	 */
+	Stream<T> stream();
 	/**
 	 * @param listener
 	 * @return
 	 */
-	MMapSubscription subscribe(MMapIndexListener listener);
+	HandlerRegistration subscribeOnIndex(BiConsumer<Integer, Integer> listener);
 	
 }

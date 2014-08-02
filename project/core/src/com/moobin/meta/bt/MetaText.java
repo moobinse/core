@@ -1,6 +1,6 @@
 package com.moobin.meta.bt;
 
-import com.moobin.annotation.BtText;
+import com.moobin.annotation.bt.BtText;
 import com.moobin.meta.MetaDataField;
 
 public class MetaText extends AbstractMetaBusinessType<String> {

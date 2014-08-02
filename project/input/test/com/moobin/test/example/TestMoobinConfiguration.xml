@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moobin>
+	
+	<meta package="com.moobin.test.example">
+		<entity name="TestItem">
+			<add-field name="dummy" class="com.moobin.test.example.TestItem_dummy"/>
+			<remove-field name="name"/>
+		</entity>
+		<entity name="Currency"/>
+		<entity name="Country"/>
+	</meta>
+	
+	<cache>
+		<root name="TestItem"/>
+		<root name="Country"/>
+		<root name="Currency"/>
+	</cache>
+	
+</moobin>

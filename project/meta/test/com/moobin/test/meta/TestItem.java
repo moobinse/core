@@ -1,9 +1,9 @@
 package com.moobin.test.meta;
 
-import com.moobin.annotation.BtNumber;
 import com.moobin.annotation.Id;
-import com.moobin.annotation.BtReference;
 import com.moobin.annotation.Unique;
+import com.moobin.annotation.bt.BtNumber;
+import com.moobin.annotation.bt.BtReference;
 import com.moobin.meta.test.TestCurrency;
 
 public class TestItem {

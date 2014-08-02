@@ -1,4 +1,4 @@
-package com.moobin.annotation;
+package com.moobin.annotation.bt;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -9,12 +9,11 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface BtNumber {
+public @interface BtText {
 
-	long min() default Integer.MIN_VALUE;
+	int minLength() default 0;
 
-	long max() default Integer.MAX_VALUE;
+	int maxLength();
 
-	long step() default 1; 
-
+	String regExp() default "";
 }

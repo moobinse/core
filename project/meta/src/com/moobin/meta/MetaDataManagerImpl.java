@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import com.moobin.annotation.BtDecimal;
-import com.moobin.annotation.BtNumber;
-import com.moobin.annotation.BtText;
+import com.moobin.annotation.bt.BtDecimal;
+import com.moobin.annotation.bt.BtNumber;
+import com.moobin.annotation.bt.BtText;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class MetaDataManagerImpl implements MetaDataManager {
@@ -29,8 +29,8 @@ public class MetaDataManagerImpl implements MetaDataManager {
 	}
 
 	@Override
-	public <T> void add(Class<T> clazz) {
-		MetaDataObject<T> meta = createMetaDataObject(clazz);
+	public void add(Class<?> clazz) {
+		MetaDataObject<?> meta = createMetaDataObject(clazz);
 		classMap.put(clazz, meta);
 		nameMap.put(clazz.getSimpleName(), meta);
 	}

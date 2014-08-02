@@ -1,6 +1,6 @@
 package com.moobin.meta.bt;
 
-import com.moobin.annotation.BtReference;
+import com.moobin.annotation.bt.BtReference;
 import com.moobin.meta.MetaDataField;
 
 public class MetaReference<T> extends AbstractMetaBusinessType<T> {

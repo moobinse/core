@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/moobin core"/>
 	<classpathentry kind="src" path="/moobin meta"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/moobin cache"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/moobin configuration"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,7 +1,10 @@
 package com.moobin.cache;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
@@ -9,7 +12,7 @@ import java.util.stream.Stream;
  *
  * @param <T>
  */
-public interface SimpleCacheMap<T> {
+public interface CacheMap<T> {
 
 	/**
 	 * 
@@ -54,44 +57,38 @@ public interface SimpleCacheMap<T> {
 	int size();
 
 	/**
-	 * @param item
-	 */
-	void add(T item);
-	
-	/**
-	 * @param items
-	 */
-	default void add(Stream<T> items) {
-		items.forEach(this::add);
-	}
-	
-	/**
-	 * @param key
-	 */
-	T remove(String key);
-	
-	/**
-	 * Remove item
-	 * @param item
-	 * @return returns true if item in the list
-	 */
-	default boolean remove(T item) {
-		return remove(getKey(item)) != null;
-	}
-	
-	/**
-	 * @param items
-	 */
-	default void remove(Stream<T> items) {
-		items.forEach(this::remove);
-	}
-
-	/**
-	 * @param listener
-	 * @param withSnapshot
-	 * @param delay
+	 * 
 	 * @return
 	 */
-	MMapSubscription subscribe(MMapListener<T> listener, boolean withSnapshot, int delay);
+	Stream<T> stream();
+	
+	/**
+	 * @param listener
+	 * @return
+	 */
+	HandlerRegistration subscribe(BiConsumer<T,T> listener);
+	
+	/**
+	 * 
+	 * @param filter
+	 * @return
+	 */
+	CacheMap<T> filter(Predicate<T> filter);
 
+	/**
+	 * 
+	 * @param sort
+	 * @return
+	 */
+	CacheMapSorting<T> sort(Comparator<T> sort);
+
+	/**
+	 * 
+	 * @param function
+	 * @return
+	 */
+	default <U extends Comparable<? super U>> CacheMapSorting<T> sort(Function<T, U> function) {
+		return sort(Comparator.comparing(function));
+	}
+	
 }

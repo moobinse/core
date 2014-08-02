@@ -1,20 +1,16 @@
 package com.moobin.test.meta;
 
-import com.moobin.annotation.BtDisplay;
 import com.moobin.annotation.Id;
 import com.moobin.annotation.ReadOnly;
-import com.moobin.annotation.Xpath;
+import com.moobin.annotation.bt.BtDisplay;
 
 @ReadOnly
-@Xpath("//CcyTbl/CcyNtry")
 public class Country {
 
-	@Xpath("CtryNm")
 	@Id
 	@BtDisplay
 	public String name;
 
-	@Xpath("../CcyNtry[CtryName=current()/CtryName]/Ccy")
 	public String[] currencies;
 	
 }

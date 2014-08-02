@@ -2,19 +2,18 @@ package com.moobin.cache.impl;
 
 import java.util.function.Predicate;
 
-import com.moobin.cache.MMapListener;
-import com.moobin.cache.MMapSubscription;
-import com.moobin.cache.SimpleCacheMap;
+import com.moobin.cache.HandlerRegistration;
+import com.moobin.cache.CacheMap;
 
-public class FilteredCacheMap<T> extends SimpleCacheMapImpl<T> implements MMapListener<T> {
+public class FilteredCacheMap<T> extends CacheMapImpl<T> {
 
 	private Predicate<T> filter;
-	private final MMapSubscription subscription;
+	private final HandlerRegistration subscription;
 
-	public FilteredCacheMap(SimpleCacheMap<T> source, Predicate<T> filter) {
+	public FilteredCacheMap(CacheMap<T> source, Predicate<T> filter) {
 		super(source.getType());
 		this.filter = filter;
-		subscription = super.subscribe(this, true, 0);
+		subscription = source.subscribe(this::onEvent);
 	}
 	
 	@Override
@@ -23,28 +22,27 @@ public class FilteredCacheMap<T> extends SimpleCacheMapImpl<T> implements MMapLi
 	}
 	
 	@Override
-	public void add(T newValue) {
+	protected void add(T newValue) {
 		if (filter.test(newValue)) {
 			super.add(newValue);
 		}
 		else {
-			remove(newValue);
+			remove(getKey(newValue));
 		}
 	}
 
-	@Override
-	public void onEvent(String key, T oldValue, T newValue) {
+	private void onEvent(T oldValue, T newValue) {
 		if (newValue != null) {
 			add(newValue);
 		}
 		else {
-			remove(key);
+			remove(getKey(oldValue));
 		}
 	}
 	
 	@Override
 	public void close() {
-		subscription.close();
+		subscription.remove();
 		super.close();
 	}
 	

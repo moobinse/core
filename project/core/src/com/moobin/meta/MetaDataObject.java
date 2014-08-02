@@ -15,7 +15,11 @@ public interface MetaDataObject<T> {
 
 	Function<T, String> displayFunction();
 
-	MetaDataField<?, T> getField(String field);
+	<V> MetaDataField<V, T> getField(String field);
+
+	default <V extends Comparable<V>> MetaDataField<V, T> getComparableField(String field) {
+		return getField(field);
+	}
 	
 	List<MetaDataField<?,T>> getFields();
 

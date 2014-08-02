@@ -1,14 +1,12 @@
 package com.moobin.test.example;
 
-import com.moobin.annotation.BtDisplay;
-import com.moobin.annotation.BtNumber;
-import com.moobin.annotation.BtText;
 import com.moobin.annotation.Id;
 import com.moobin.annotation.ReadOnly;
-import com.moobin.annotation.Xpath;
+import com.moobin.annotation.bt.BtDisplay;
+import com.moobin.annotation.bt.BtNumber;
+import com.moobin.annotation.bt.BtText;
 import com.moobin.object.MoobinObject;
 
-@Xpath("//CcyTbl/CcyNtry")
 @ReadOnly
 public class Currency extends MoobinObject {
 	

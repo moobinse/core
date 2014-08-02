@@ -1,6 +1,6 @@
 package com.moobin.meta.bt;
 
-import com.moobin.annotation.BtNumber;
+import com.moobin.annotation.bt.BtNumber;
 import com.moobin.meta.MetaDataField;
 
 public class MetaNumber<T extends Number> extends AbstractMetaBusinessType<T> {
