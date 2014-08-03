@@ -3,8 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/moobin core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/moobin core"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry exported="true" kind="src" path="/moobin meta"/>
+	<classpathentry kind="src" path="/moobin meta"/>
+	<classpathentry kind="src" path="/moobin configuration"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

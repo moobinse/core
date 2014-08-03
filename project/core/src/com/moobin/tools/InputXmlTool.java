@@ -1,4 +1,4 @@
-package com.moobin.input.xml;
+package com.moobin.tools;
 
 import java.io.IOException;
 import java.net.URL;

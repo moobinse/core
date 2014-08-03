@@ -23,20 +23,20 @@ public class CacheManagerImpl implements CacheManager {
 
 	@Override
 	public <T> CacheRootMap<T> getRootMap(String name) {
-		throw new MoobinException(null);
+		throw new MoobinException("");
 	}
 	
 	@Override
 	public void createRootMap(Class<?> type) {
 		CacheRootMap map = new CacheRootMapImpl<>(type);
 		if (rootMaps.put(type, map) != null) {
-			throw new MoobinException(null);
+			throw new MoobinException("");
 		}
 	}
 
 	@Override
 	public <T> CacheRootMap<T> createRootMap(Class<T> type, String name) {
-		throw new MoobinException(null);
+		throw new MoobinException("");
 	}
 
 	@Override

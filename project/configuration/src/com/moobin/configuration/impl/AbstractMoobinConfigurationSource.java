@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import com.moobin.configuration.MoobinConfigurationSource;
 
-public class AbscractMoobinConfigurationSource implements MoobinConfigurationSource {
+public class AbstractMoobinConfigurationSource implements MoobinConfigurationSource {
 
 	private final HashSet<Class<?>> metaEntities = new HashSet<>();
 	private final HashSet<Class<?>> cacheRootSet = new HashSet<>();

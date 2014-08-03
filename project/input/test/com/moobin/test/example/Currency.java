@@ -23,6 +23,8 @@ public class Currency extends MoobinObject {
 	@BtNumber(min=1, max=4)
 	public int mnrUnits;
 
+	public int[] intArr = {1, 3, 5};
+	
 	@Override
 	public String toString() {
 		return currencyNumber + " " + name;

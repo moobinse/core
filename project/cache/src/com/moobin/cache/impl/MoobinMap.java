@@ -12,7 +12,7 @@ public class MoobinMap<K,T> {
 	
 	public void put(K key, T item) {
 		if (map.put(key, item) != null) {
-			throw new MoobinException(null);
+			throw new MoobinException("");
 		}
 	}
 	

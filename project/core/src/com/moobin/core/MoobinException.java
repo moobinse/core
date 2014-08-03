@@ -7,4 +7,8 @@ public class MoobinException extends RuntimeException {
 		super(e);
 	}
 
+	public MoobinException(String message) {
+		super(message);
+	}
+
 }

@@ -13,7 +13,7 @@ public class MoobinSet<T> {
 	
 	public void add(T item) {
 		if (!set.add(item)) {
-			throw new MoobinException(null);
+			throw new MoobinException("");
 		}
 	}
 	

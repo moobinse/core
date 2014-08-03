@@ -4,19 +4,18 @@ import java.net.URL;
 
 import org.w3c.dom.Document;
 
-import com.moobin.cache.CacheMap;
 import com.moobin.cache.CacheMapSorting;
 import com.moobin.cache.impl.CacheManagerImpl;
 import com.moobin.configuration.MoobinConfiguration;
 import com.moobin.configuration.MoobinConfigurationSource;
 import com.moobin.core.Core;
-import com.moobin.input.xml.InputXmlTool;
 import com.moobin.input.xml.XmlInputMapping;
 import com.moobin.meta.MetaDataManagerImpl;
 import com.moobin.test.example.Country;
 import com.moobin.test.example.Currency;
-import com.moobin.test.example.TestMoobinConfiguration;
 import com.moobin.test.example.TestXmlInputMappings;
+import com.moobin.test.example.conf.TestMoobinConfiguration;
+import com.moobin.tools.InputXmlTool;
 
 public class TestInput {
 
@@ -40,7 +39,7 @@ public class TestInput {
 		load("com/moobin/test/input/Currency.xml", Currency.class);
 		load("com/moobin/test/input/Country.xml", Country.class);
 		System.out.println(Core.get().getCacheManager().getRootMap(Currency.class).get("SEK").name);
-		CacheMap<Currency> fMap = Core.get().getCacheManager().getRootMap(Currency.class).filter((c) -> c.code.startsWith("S"));
+		Core.get().getCacheManager().getRootMap(Currency.class).filter((c) -> c.code.startsWith("S"));
 		sMap.get(0, sMap.source().size() -1).stream().forEach(System.out::println);
 	}
  

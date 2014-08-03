@@ -13,13 +13,13 @@ import org.w3c.dom.Element;
 import com.moobin.core.Core;
 import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataObject;
+import com.moobin.tools.InputXmlTool;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
 public class XmlInputMapping<T> {
 
-	private static Map<Class<?>, XmlInputMapping<?>> map = new HashMap();
+	private static Map<Class<?>, XmlInputMapping<?>> map = new HashMap<>();
 	private Class<T> type;
-	private Map<String, FieldMapping> fieldMappings = new HashMap();
+	private Map<String, FieldMapping> fieldMappings = new HashMap<>();
 	private MetaDataObject<T> meta;
 	private String xpath;
 
@@ -62,7 +62,7 @@ public class XmlInputMapping<T> {
 
 
 	private Collection<T> inspect(Document doc) {
-		List<T> list = new ArrayList();
+		List<T> list = new ArrayList<>();
 		InputXmlTool.getNodes(doc, xpath).forEach((e) -> list.add(inspect(e)));
 		return list;
 	}
@@ -83,12 +83,13 @@ public class XmlInputMapping<T> {
 		return new XmlInputMapping<T>(type, xpath);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public static <T> XmlInputMapping<T> get(Class<T> type) {
 		return (XmlInputMapping<T>) map.get(type);
 	}
 
 	public static Stream<?> parseDocument(Document doc) {
-		List<Object> items = new ArrayList();
+		List<Object> items = new ArrayList<>();
 		map.values().forEach((em) -> items.addAll(em.inspect(doc)));
 		return items.stream();
 	}

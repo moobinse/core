@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <moobin>
-	
 	<meta package="com.moobin.test.example">
 		<entity name="TestItem">
 			<add-field name="dummy" class="com.moobin.test.example.TestItem_dummy"/>

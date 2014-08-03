@@ -125,7 +125,7 @@ public class CacheMapImpl<T> implements CacheMap<T> {
 			map.clear();
 		}
 		else {
-			throw new MoobinException(null);
+			throw new MoobinException("");
 		}
 	}
 	
