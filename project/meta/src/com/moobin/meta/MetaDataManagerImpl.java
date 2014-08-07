@@ -3,6 +3,7 @@ package com.moobin.meta;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,12 @@ public class MetaDataManagerImpl implements MetaDataManager {
 	private BiFunction<MetaDataObject, Field, MetaDataField> metaDataFieldConstructor = MetaDataFieldImpl::new;
 	private List<Class<? extends Annotation>> businessTypeAnnotations = 
 			Arrays.asList(BtNumber.class, BtText.class, BtDecimal.class);
+	
+	
+	@Override
+	public Collection<MetaDataObject<?>> getMetaData() {
+		return classMap.values();
+	}
 	
 	@Override
 	public <T> MetaDataObject<T> getMetaData(Class<T> pType) {

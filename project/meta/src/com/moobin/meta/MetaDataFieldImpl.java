@@ -12,9 +12,11 @@ import com.moobin.annotation.bt.BtNumber;
 import com.moobin.annotation.bt.BtReference;
 import com.moobin.annotation.bt.BtText;
 import com.moobin.core.MoobinException;
+import com.moobin.meta.bt.MetaBoolean;
 import com.moobin.meta.bt.MetaDecimal;
 import com.moobin.meta.bt.MetaEnum;
 import com.moobin.meta.bt.MetaNumber;
+import com.moobin.meta.bt.MetaObject;
 import com.moobin.meta.bt.MetaReference;
 import com.moobin.meta.bt.MetaText;
 
@@ -29,7 +31,7 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 	private MetaBusinessType<?> businessType;
 	
 	private Class<?> javaType;
-	private Field field;
+	Field field;
 
 	private static final List<Class<?>> numberTypes = Arrays.asList(Integer.class, int.class, Long.class, long.class, Byte.class, byte.class, Short.class, short.class);
 	private static final List<Class<?>> decimalTypes = Arrays.asList(Double.class, double.class, Float.class, float.class);
@@ -86,7 +88,12 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 		else if (Enum.class.isAssignableFrom(javaType)) {
 			setBusinessType(new MetaEnum(this));
 		}
-		System.out.println(this);
+		else if (Boolean.class == javaType || boolean.class == javaType) {
+ 			setBusinessType(new MetaBoolean((MetaDataField<Boolean, ?>) this));
+		}
+		else {
+			setBusinessType(new MetaObject(javaType, this));
+		}
 	}
 	
 	private void setBusinessType(MetaBusinessType<?> businessType) {
@@ -118,6 +125,14 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 	public boolean isUnique() {
 		return unique;
 	}
+	
+	@Override
+	public Class<?> getReferenceType() {
+		if (businessType instanceof MetaReference) {
+			return ((MetaReference<?>) businessType).referenceTo();
+		}
+		return null;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -136,18 +151,24 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 	}
 
 	@Override
-	public void set(T item, String value) {
-		if (value == null) {
-			return;
-		}
+	public void set(T item, Object value) {
 		try {
-			if (field.getType() == String.class) {
-				field.set(item, value);
+			if (value == null) {
 			}
-			if (field.getType() == Integer.class || field.getType() == int.class) {
-				field.set(item, Integer.valueOf(value));
+			else if (value instanceof List) {
+				value = Setter.arrayFromList((List<?>) value, javaType);
 			}
-		} catch (IllegalArgumentException | IllegalAccessException e) {
+			else if (value instanceof String) {
+				if (isArray()) {
+					value = Setter.arrayFromString((String) value, javaType);
+				}
+				else {
+					value = Setter.fromString((String) value, javaType);
+				}
+			}
+			field.set(item, value);
+		}
+		catch (Exception e) {
 			throw new MoobinException(e);
 		}
 	}

@@ -6,11 +6,18 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import com.moobin.configuration.MoobinConfigurationSource;
+import com.moobin.core.data.MetaField;
+import com.moobin.core.data.MetaObject;
 
 public class AbstractMoobinConfigurationSource implements MoobinConfigurationSource {
 
 	private final HashSet<Class<?>> metaEntities = new HashSet<>();
 	private final HashSet<Class<?>> cacheRootSet = new HashSet<>();
+	
+	public AbstractMoobinConfigurationSource() {
+		addCacheRoot(MetaObject.class);
+		addMetaEntity(MetaField.class);
+	}
 	
 	@Override
 	public Stream<Class<?>> getTypes() {
@@ -36,6 +43,7 @@ public class AbstractMoobinConfigurationSource implements MoobinConfigurationSou
 	
 	protected void addCacheRoot(Class<?>...types) {
 		Arrays.asList(types).forEach(cacheRootSet::add);
+		Arrays.asList(types).forEach(metaEntities::add);
 	}
 	
 	

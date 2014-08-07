@@ -2,10 +2,13 @@ package com.moobin.meta;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 public interface MetaDataManager {
 
 	void add(Class<?> type);
+
+	Collection<MetaDataObject<?>> getMetaData();
 
 	<T> MetaDataObject<T> getMetaData(Class<T> type);
 	
@@ -19,5 +22,6 @@ public interface MetaDataManager {
 	}
 
 	boolean isBusinessTypeAnnotation(Annotation annotation);
+
 	
 }

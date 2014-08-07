@@ -1,61 +1,34 @@
 package com.moobin.output.js;
 
+import org.json.JSONObject;
+
+import com.moobin.core.Core;
 import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataObject;
 
-public class MoobinToJson extends MoobinTo {
 
-	public MoobinToJson(Object item) {
-		super(item);
-	}
-	
-	@Override
-	protected void startObject(MetaDataObject<?> meta) {
-		buffer.append("{");
-	}
+public class MoobinToJson<T> {
 
-	@Override
-	protected void closeObject(MetaDataObject<?> meta) {
-		buffer.append("\n}");
-	}
+	private T item;
+	private MetaDataObject<T> meta;
+	private JSONObject json;
 	
-	@Override
-	protected void addNull() {
-		buffer.append("null");
+	private MoobinToJson(T item) {
+		this.item = item;
+		meta = Core.get().getMetaDataManager().getItemMetaData(item);
+		json = new JSONObject();
+		meta.getFields().forEach((f) -> addField(f));
 	}
 
-	@Override
-	protected void addSimple(Object value) {
-		buffer.append(value);
+	private void addField(MetaDataField<?, T> field) {
+		Object value = field.get(item);
+		if (value != null && Core.get().getMetaDataManager().getItemMetaData(value) != null) {
+			value = new MoobinToJson<>(value).json;
+		}
+		json.put(field.getName(), value);
 	}
 	
-	@Override
-	protected void addString(Object value) {
-		buffer.append('"').append(value).append('"');
+	public static <T2> String format(T2 item) {
+		return new MoobinToJson<T2>(item).json.toString();
 	}
-	
-	@Override
-	protected void addFieldSeparator() {
-		buffer.append(',');
-	}
-
-	@Override
-	protected <T> void add(MetaDataField<?, T> field, T item) {
-		add(field, field.getName(), field.get(item));
-	}
-	
-	protected <T> void add(MetaDataField<?, T> field, String name, Object value) {
-		buffer.append("\n  \"").append(name).append("\":");
-		add(value);
-	}
-
-	@Override
-	protected void addArray(Object arr) {
-		buffer.append("[");
-		if (arr instanceof int[]) add((int[]) arr);
-		if (arr instanceof byte[]) add((byte[]) arr);
-		if (arr instanceof Object[]) add((Object[]) arr);
-		buffer.append("]");
-	}
-	
 }

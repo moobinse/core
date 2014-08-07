@@ -12,18 +12,22 @@ public interface MetaDataField<F,T> {
 
 	Type getType();
 	
+	Class<?> getReferenceType();
+
 	boolean isArray();
 	
 	boolean isRequired();
 	
 	boolean isUnique();
 	
+
 	default Function<T, F> getFunction() {
 		return (t) -> get(t);
 	}
 	
 	F get(T item);
 	
-	void set(T item, String value);
+	void set(T item, Object value);
+
 
 }
