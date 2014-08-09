@@ -16,24 +16,23 @@ import com.moobin.cache.CacheMapSorting;
 import com.moobin.cache.HandlerRegistration;
 import com.moobin.core.Core;
 import com.moobin.core.MoobinException;
-import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataObject;
 
-@SuppressWarnings("unchecked")
 public class CacheMapImpl<T> implements CacheMap<T> {
 
 	private final Class<T> type;
 	private final Map<String, T> map = new HashMap<String, T>();
 	protected final MetaDataObject<T> meta;
 	protected Function<T, String> keyFunction;
+	protected Function<T, String> textFunction;
 	private CacheCallbacks callbacks = new CacheCallbacks();
 	private Subscriptions subscriptions = new Subscriptions();
 	
 	public CacheMapImpl(Class<T> type) {
 		this.type = type;
 		meta = Core.get().getMetaDataManager().getMetaData(type);
-		MetaDataField<?, T> f = meta.getKeyField();
-		this.keyFunction = (Function<T, String>) f.getFunction();
+		this.keyFunction = meta.getKeyField()::get;
+		this.textFunction = meta.getDisplayField()::get;
 	}
 	
 	@Override
@@ -144,27 +143,27 @@ public class CacheMapImpl<T> implements CacheMap<T> {
 	}
 
 	public CacheMapSorting<T> sort(String field) {
-		return sort(Comparator.comparing(meta.getComparableField(field).getFunction()));
+		return sort(Comparator.comparing(meta.getComparableField(field)::get));
 	}
 
 	public CacheMapSorting<T> sort(String... field) {
-		Comparator<T> c = Comparator.comparing(meta.getComparableField(field[0]).getFunction());
+		Comparator<T> c = Comparator.comparing(meta.getComparableField(field[0])::get);
 		for (int i = 1; i < field.length; i++) {
-			c = c.thenComparing(meta.getComparableField(field[i]).getFunction());
+			c = c.thenComparing(meta.getComparableField(field[i])::get);
 		}
 		return sort(c);
 	}
 
 	public CacheMapSorting<T> sort(String field, boolean reversed) {
 		return sort(Comparator
-				.comparing(meta.getComparableField(field).getFunction())
+				.comparing(meta.getComparableField(field)::get)
 				.reversed());
 	}
 	
 	public CacheMapSorting<T> sort(String field1, String field2) {
 		return sort(Comparator
-				.comparing(meta.getComparableField(field1).getFunction())
-				.thenComparing(meta.getComparableField(field2).getFunction()));
+				.comparing(meta.getComparableField(field1)::get)
+				.thenComparing(meta.getComparableField(field2)::get));
 	}
 	
 	@Override

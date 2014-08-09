@@ -8,39 +8,41 @@ import com.moobin.client.JsBase;
 @SuppressWarnings("unused")
 public class JsCurrency extends JsBase {
 
+  protected JsCurrency() { }
 
-    public String getCode() {
+
+    public final String getCode() {
         return get("code");
     }
 
-    public void  setCode(String code) {
+    public final void  setCode(String code) {
         set("code", code);
     }
 
 
-    public String getName() {
+    public final String getName() {
         return get("name");
     }
 
-    public void  setName(String name) {
+    public final void  setName(String name) {
         set("name", name);
     }
 
 
-    public int getCurrencyNumber() {
+    public final int getCurrencyNumber() {
         return getInteger("currencyNumber");
     }
 
-    public void  setCurrencyNumber(int currencyNumber) {
+    public final void  setCurrencyNumber(int currencyNumber) {
         set("currencyNumber", currencyNumber);
     }
 
 
-    public int getMnrUnits() {
+    public final int getMnrUnits() {
         return getInteger("mnrUnits");
     }
 
-    public void  setMnrUnits(int mnrUnits) {
+    public final void  setMnrUnits(int mnrUnits) {
         set("mnrUnits", mnrUnits);
     }
 

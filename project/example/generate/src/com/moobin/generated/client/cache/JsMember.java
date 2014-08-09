@@ -8,38 +8,40 @@ import com.moobin.client.JsBase;
 @SuppressWarnings("unused")
 public class JsMember extends JsBase {
 
+  protected JsMember() { }
 
-    public String getMemberId() {
+
+    public final String getMemberId() {
         return get("memberId");
     }
 
-    public void  setMemberId(String memberId) {
+    public final void  setMemberId(String memberId) {
         set("memberId", memberId);
     }
 
 
-    public String getName() {
+    public final String getName() {
         return get("name");
     }
 
-    public void  setName(String name) {
+    public final void  setName(String name) {
         set("name", name);
     }
 
 
-    public JsAddress getAdress() {
+    public final JsAddress getAdress() {
         return getObject("adress");
     }
 
-    public void  setAdress(JsAddress adress) {
+    public final void  setAdress(JsAddress adress) {
         set("adress", adress);
     }
 
 
-    public JsArrayString getUsers() {
+    public final JsArrayString getUsers() {
         return getArrayString("users");
     }
-    public void  setUsers(JsArrayString users) {
+    public final void  setUsers(JsArrayString users) {
         set("users", users);
     }
 }

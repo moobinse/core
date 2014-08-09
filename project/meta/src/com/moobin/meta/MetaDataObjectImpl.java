@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 import com.moobin.annotation.Id;
 import com.moobin.annotation.bt.BtDisplay;
@@ -20,7 +19,7 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 
 	private String name;
 	private MetaDataField<String, T> displayField;
-	private MetaDataField<?, T> keyField;
+	private MetaDataField<String, T> keyField;
 	private List<MetaDataField<?, T>> allFields = new ArrayList<MetaDataField<?,T>>();
 	private List<MetaDataField<?, T>> simpleFields = new ArrayList<MetaDataField<?,T>>();
 	private List<MetaDataField<?, T>> objectFields = new ArrayList<MetaDataField<?,T>>();
@@ -54,7 +53,7 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 		}
 		if (field.getAnnotation(Id.class) != null) {
 			assert keyField == null;
-			keyField = meta;
+			keyField = (MetaDataField<String, T>) meta;
 		}
 		if (field.getAnnotation(BtDisplay.class) != null) {
 			assert displayField == null;
@@ -89,23 +88,13 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	}
 	
 	@Override
-	public MetaDataField<?, T> getKeyField() {
+	public MetaDataField<String, T> getKeyField() {
 		return keyField;
 	}
 	
 	@Override
 	public MetaDataField<String, T> getDisplayField() {
 		return displayField;
-	}
-
-	@Override
-	public Function<T, ?> keyFunction() {
-		return getKeyField().getFunction();
-	}
-
-	@Override
-	public Function<T, String> displayFunction() {
-		return getDisplayField().getFunction();
 	}
 
 	@Override

@@ -8,30 +8,32 @@ import com.moobin.client.JsBase;
 @SuppressWarnings("unused")
 public class JsMetaField extends JsBase {
 
+  protected JsMetaField() { }
 
-    public String getName() {
+
+    public final String getName() {
         return get("name");
     }
 
-    public void  setName(String name) {
+    public final void  setName(String name) {
         set("name", name);
     }
 
 
-    public String getBusinessType() {
+    public final String getBusinessType() {
         return get("businessType");
     }
 
-    public void  setBusinessType(String businessType) {
+    public final void  setBusinessType(String businessType) {
         set("businessType", businessType);
     }
 
 
-    public String getJavaType() {
+    public final String getJavaType() {
         return get("javaType");
     }
 
-    public void  setJavaType(String javaType) {
+    public final void  setJavaType(String javaType) {
         set("javaType", javaType);
     }
 

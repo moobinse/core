@@ -8,75 +8,82 @@ import com.moobin.client.JsBase;
 @SuppressWarnings("unused")
 public class JsInOutTest extends JsBase {
 
+  protected JsInOutTest() { }
 
-    public String getId() {
+
+    public final String getId() {
         return get("id");
     }
 
-    public void  setId(String id) {
+    public final void  setId(String id) {
         set("id", id);
     }
 
 
-    public String getName() {
+    public final String getName() {
         return get("name");
     }
 
-    public void  setName(String name) {
+    public final void  setName(String name) {
         set("name", name);
     }
 
 
-    public int getNumber() {
+    public final int getNumber() {
         return getInteger("number");
     }
 
-    public void  setNumber(int number) {
+    public final void  setNumber(int number) {
         set("number", number);
     }
 
 
-    public JsArrayInteger getInts() {
+    public final JsArrayInteger getInts() {
         return getArrayInteger("ints");
     }
-    public void  setInts(JsArrayInteger ints) {
+    public final void  setInts(JsArrayInteger ints) {
         set("ints", ints);
     }
+    public final void  setInts(int... ints) {
+        JsArrayInteger arr = createArray().cast();
+        for (int i : ints) arr.push(i);
+	      setInts(arr);
+    }
 
-    public boolean getBoo() {
+    public final boolean getBoo() {
         return getBoolean("boo");
     }
 
-    public void  setBoo(boolean boo) {
+    public final void  setBoo(boolean boo) {
         set("boo", boo);
     }
 
 
-    public JsArrayBoolean getBooleans() {
+    public final JsArrayBoolean getBooleans() {
         return getArrayBoolean("booleans");
     }
-    public void  setBooleans(JsArrayBoolean booleans) {
+    public final void  setBooleans(JsArrayBoolean booleans) {
         set("booleans", booleans);
     }
 
-    public String getCcy() {
+    public final String getCcy() {
         return get("ccy");
     }
 
-    public void  setCcy(String ccy) {
+    public final void  setCcy(String ccy) {
         set("ccy", ccy);
     }
 
-    public void getCcy(CacheCallback<JsCurrency> callback) {
+    public final void getCcy(CacheCallback<JsCurrency> callback) {
         get("Currency", getCcy(), callback);
     }
 
 
-    public JsInOutTest getChild() {
+    public final JsInOutTest getChild() {
         return getObject("child");
     }
 
-    public void  setChild(JsInOutTest child) {
+    public final void  setChild(JsInOutTest child) {
         set("child", child);
     }
 

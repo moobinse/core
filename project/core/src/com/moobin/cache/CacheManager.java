@@ -9,7 +9,7 @@ public interface CacheManager {
 
 	<T> CacheRootMap<T> getRootMap(String name);
 
-	void createRootMap(Class<?> type);
+	<T> void createRootMap(Class<T> type);
 	
 	<T> CacheRootMap<T> createRootMap(Class<T> type, String name);
 	

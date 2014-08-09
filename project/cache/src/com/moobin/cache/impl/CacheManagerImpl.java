@@ -27,8 +27,8 @@ public class CacheManagerImpl implements CacheManager {
 	}
 	
 	@Override
-	public void createRootMap(Class<?> type) {
-		CacheRootMap map = new CacheRootMapImpl<>(type);
+	public <T> void createRootMap(Class<T> type) {
+		CacheRootMap<T> map = new CacheRootMapImpl<>(type);
 		if (rootMaps.put(type, map) != null) {
 			throw new MoobinException("");
 		}

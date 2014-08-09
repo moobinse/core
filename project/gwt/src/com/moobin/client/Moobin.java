@@ -1,12 +1,12 @@
 package com.moobin.client;
 
-import com.google.gwt.core.shared.GWT;
+import com.moobin.client.cache.impl.CacheImpl;
 
 public class Moobin {
 
-	private static Cache moobinCache = GWT.create(Cache.class);
+	private static AsyncCache<JsBase> moobinCache = new CacheImpl();
 	
-	public static Cache getCache() {
+	public static AsyncCache<JsBase> getCache() {
 		return moobinCache;
 	}
 

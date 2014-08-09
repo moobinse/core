@@ -8,20 +8,22 @@ import com.moobin.client.JsBase;
 @SuppressWarnings("unused")
 public class JsCountry extends JsBase {
 
+  protected JsCountry() { }
 
-    public String getName() {
+
+    public final String getName() {
         return get("name");
     }
 
-    public void  setName(String name) {
+    public final void  setName(String name) {
         set("name", name);
     }
 
 
-    public JsArrayString getCurrencies() {
+    public final JsArrayString getCurrencies() {
         return getArrayString("currencies");
     }
-    public void  setCurrencies(JsArrayString currencies) {
+    public final void  setCurrencies(JsArrayString currencies) {
         set("currencies", currencies);
     }
 }

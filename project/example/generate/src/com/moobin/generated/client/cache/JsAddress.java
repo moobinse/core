@@ -8,30 +8,32 @@ import com.moobin.client.JsBase;
 @SuppressWarnings("unused")
 public class JsAddress extends JsBase {
 
+  protected JsAddress() { }
 
-    public String getOwner() {
+
+    public final String getOwner() {
         return get("owner");
     }
 
-    public void  setOwner(String owner) {
+    public final void  setOwner(String owner) {
         set("owner", owner);
     }
 
 
-    public String getStreet() {
+    public final String getStreet() {
         return get("street");
     }
 
-    public void  setStreet(String street) {
+    public final void  setStreet(String street) {
         set("street", street);
     }
 
 
-    public String getCity() {
+    public final String getCity() {
         return get("city");
     }
 
-    public void  setCity(String city) {
+    public final void  setCity(String city) {
         set("city", city);
     }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="test-classes" path="test"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/moobin example generate"/>
+	<classpathentry kind="src" path="/moobin client"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/moobin gwt"/>
+	<classpathentry kind="src" path="/moobin core"/>
+	<classpathentry kind="src" path="/moobin meta"/>
+	<classpathentry kind="src" path="/moobin output"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/moobin 3p"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/moobin configuration"/>
+	<classpathentry kind="src" path="/moobin cache"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>

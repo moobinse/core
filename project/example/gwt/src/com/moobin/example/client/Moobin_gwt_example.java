@@ -1,7 +1,5 @@
 package com.moobin.example.client;
 
-import com.moobin.example.shared.FieldVerifier;
-import com.moobin.generated.client.cache.JsUser;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -18,6 +16,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.moobin.client.CacheCallback;
+import com.moobin.example.shared.FieldVerifier;
+import com.moobin.generated.client.cache.JsCache;
+import com.moobin.generated.client.cache.JsMetaObject;
+import com.moobin.generated.client.cache.JsUser;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -42,10 +45,17 @@ public class Moobin_gwt_example implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		JsUser user = null;
-		user.getName();
-		JavaScriptObject js = JavaScriptObject.createObject();
-		user = js.cast();
+		JsCache.getMetaObject("User", new CacheCallback<JsMetaObject>() {
+			
+			@Override
+			public void callback(JsMetaObject value) {
+				JsMetaObject mUser = value;
+				mUser.getName();
+				mUser.getFields();
+				JavaScriptObject js = JavaScriptObject.createObject();
+				mUser = js.cast();
+			}
+		});
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");

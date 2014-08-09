@@ -8,22 +8,22 @@ import com.moobin.client.JsBase;
 @SuppressWarnings("unused")
 public class JsMetaObject extends JsBase {
 
+  protected JsMetaObject() { }
 
-    public String getName() {
+
+    public final String getName() {
         return get("name");
     }
 
-    public void  setName(String name) {
+    public final void  setName(String name) {
         set("name", name);
     }
 
 
-    public JsMetaField getFields() {
-        return getObject("fields");
+    public final JsArray<JsMetaField> getFields() {
+        return getArray("fields");
     }
-
-    public void  setFields(JsMetaField fields) {
+    public final void  setFields(JsArray<JsMetaField> fields) {
         set("fields", fields);
     }
-
 }

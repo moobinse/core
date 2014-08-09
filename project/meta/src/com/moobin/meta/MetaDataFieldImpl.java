@@ -3,7 +3,6 @@ package com.moobin.meta;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 import com.moobin.annotation.Required;
 import com.moobin.annotation.Unique;
@@ -173,11 +172,6 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 		}
 	}
 
-	@Override
-	public Function<T, F> getFunction() {
-		return (t) -> get(t);
-	}
-	
 	@Override
 	public String toString() {
 		return objectName + "." + fieldName + "[" + businessType + "]";

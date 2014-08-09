@@ -1,6 +1,5 @@
 package com.moobin.meta;
 
-import java.util.function.Function;
 
 public interface MetaDataField<F,T> {
 	
@@ -20,13 +19,8 @@ public interface MetaDataField<F,T> {
 	
 	boolean isUnique();
 	
-
-	default Function<T, F> getFunction() {
-		return (t) -> get(t);
-	}
-	
 	F get(T item);
-	
+
 	void set(T item, Object value);
 
 

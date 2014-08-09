@@ -1,0 +1,2 @@
+serviceClass: com.moobin.example.sim.client.GreetingService
+path: FFE451C301AB79F438FE92B1A50F25D0.gwt.rpc

@@ -7,6 +7,6 @@ public class MetaObject {
 	@Id
 	public String name;
 	
-	public MetaField fields;
+	public MetaField[] fields;
 	
 }
