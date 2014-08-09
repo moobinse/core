@@ -5,7 +5,7 @@ import com.moobin.annotation.Unique;
 import com.moobin.annotation.bt.BtDisplay;
 import com.moobin.annotation.bt.BtText;
 
-public class Organisation {
+public class Member {
 
 	@Id
 	public String id;

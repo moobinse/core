@@ -1,7 +1,6 @@
 package com.moobin.generate.tools;
 
 import com.moobin.cache.impl.CacheManagerImpl;
-import com.moobin.configuration.MoobinConfigurationSource;
 import com.moobin.configuration.impl.MoobinConfigurationImpl;
 import com.moobin.core.Core;
 import com.moobin.meta.MetaDataManagerImpl;
@@ -11,10 +10,9 @@ public class GenerateGwtExample extends GenerateGwtTool {
 
 	public static void main(String[] args) {
 
-		MoobinConfigurationSource config = new ExampleConfiguration();
 		Core.get().set(new MetaDataManagerImpl());
 		Core.get().set(new CacheManagerImpl());
-		Core.get().set(new MoobinConfigurationImpl(config));
+		Core.get().set(new MoobinConfigurationImpl(ExampleConfiguration.get()));
 		Core.get().start();
 		generateCacheNavigator("src");
 		generateCacheItems("src");

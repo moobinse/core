@@ -1,5 +1,6 @@
 package com.moobin.generate.tools;
 
+import com.moobin.configuration.MoobinConfigurationSource;
 import com.moobin.configuration.impl.AbstractMoobinConfigurationSource;
 import com.moobin.output.test.InOutTest;
 import com.moobin.output.test.data.Address;
@@ -10,7 +11,13 @@ import com.moobin.test.meta.Currency;
 
 public class ExampleConfiguration extends AbstractMoobinConfigurationSource {
 
-	public ExampleConfiguration()
+	private static final MoobinConfigurationSource config = new ExampleConfiguration();
+	
+	public static MoobinConfigurationSource get() {
+		return config;
+	}
+	
+	private ExampleConfiguration()
 	{
 		addCacheRoot(InOutTest.class); 
 		addCacheRoot(Country.class);

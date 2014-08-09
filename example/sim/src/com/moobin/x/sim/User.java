@@ -10,7 +10,7 @@ public class User {
 	@BtDisplay
 	public String name;
 	
-	@BtReference(Organisation.class)
+	@BtReference(Member.class)
 	public String organisation;
 	
 }

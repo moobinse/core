@@ -2,7 +2,7 @@ package com.moobin.x.sim.configuration;
 
 import com.moobin.configuration.impl.AbstractMoobinConfigurationSource;
 import com.moobin.x.sim.Account;
-import com.moobin.x.sim.Organisation;
+import com.moobin.x.sim.Member;
 import com.moobin.x.sim.User;
 
 public class XSimConfiguration extends AbstractMoobinConfigurationSource {
@@ -21,7 +21,7 @@ public class XSimConfiguration extends AbstractMoobinConfigurationSource {
 		
 		addCacheRoot(
 				Account.class,
-				Organisation.class,
+				Member.class,
 				User.class);
 		
 		
