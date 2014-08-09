@@ -79,8 +79,8 @@ public abstract class GenerateGwtTool {
 							writer.write("    }\n");
 							writer.write("    public final void " + " set" + name + "(int... " + n + ") {\n");
 							writer.write("        JsArrayInteger arr = createArray().cast();\n");
-							writer.write("        for (int i : ints) arr.push(i);\n");
-							writer.write("	      setInts(arr);\n");
+							writer.write("        for (int i : " + n + ") arr.push(i);\n");
+							writer.write("	      set" + name + "(arr);\n");
 							writer.write("    }\n");
 						}
 						else if (f.getJavaType() == boolean.class) {
