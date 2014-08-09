@@ -6,8 +6,7 @@ import org.w3c.dom.Document;
 
 import com.moobin.cache.CacheMapSorting;
 import com.moobin.cache.impl.CacheManagerImpl;
-import com.moobin.configuration.MoobinConfiguration;
-import com.moobin.configuration.MoobinConfigurationSource;
+import com.moobin.configuration.impl.MoobinConfigurationImpl;
 import com.moobin.core.Core;
 import com.moobin.input.xml.XmlInputMapping;
 import com.moobin.meta.MetaDataManagerImpl;
@@ -22,31 +21,24 @@ public class TestInput {
 	static {
 		Core.get().set(new MetaDataManagerImpl());
 		Core.get().set(new CacheManagerImpl());
-		Core.get().set(new MoobinConfiguration() {
-			MoobinConfigurationSource source = new TestMoobinConfiguration();
-			@Override
-			public MoobinConfigurationSource source() {
-				return source;
-			}
-		});
+		Core.get().set(new MoobinConfigurationImpl(new TestMoobinConfiguration()));
 		Core.get().start();
 	}
 	
 	public static void main(String[] args) {
-		TestXmlInputMappings.init();
 		CacheMapSorting<Currency> sMap = Core.get().getCacheManager().getRootMap(Currency.class).sort((c1,c2) -> c1.code.compareTo(c2.code));
 		sMap.subscribeOnIndex((i,j) -> System.out.println(sMap.getByIndex(j).code + " remove: " + i +",  add: " + j));
-		load("com/moobin/test/input/Currency.xml", Currency.class);
-		load("com/moobin/test/input/Country.xml", Country.class);
+		load("com/moobin/test/input/Currency.xml", TestXmlInputMappings.currencyMappings());
+		load("com/moobin/test/input/Country.xml", TestXmlInputMappings.countryMappings());
 		System.out.println(Core.get().getCacheManager().getRootMap(Currency.class).get("SEK").name);
 		Core.get().getCacheManager().getRootMap(Currency.class).filter((c) -> c.code.startsWith("S"));
 		sMap.get(0, sMap.source().size() -1).stream().forEach(System.out::println);
 	}
  
-	private static void load(String resource, Class<?>... classes) {
+	private static void load(String resource, XmlInputMapping<?> mappings) {
 		URL url = InputXmlTool.getResource(resource);
 		Document doc = InputXmlTool.getDocument(url);
-		XmlInputMapping.parseDocument(doc).forEach(Core.get().getCacheManager()::add);
+		mappings.parseDocument(doc).forEach(Core.get().getCacheManager()::add);
 	}
 
 }

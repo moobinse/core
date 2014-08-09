@@ -2,9 +2,9 @@ package com.moobin.x.sim.configuration;
 
 import com.moobin.configuration.MoobinConfigurationSource;
 import com.moobin.configuration.impl.AbstractMoobinConfigurationSource;
-import com.moobin.test.example.Currency;
 import com.moobin.x.sim.Account;
 import com.moobin.x.sim.Country;
+import com.moobin.x.sim.Currency;
 import com.moobin.x.sim.Market;
 import com.moobin.x.sim.MarketList;
 import com.moobin.x.sim.Member;

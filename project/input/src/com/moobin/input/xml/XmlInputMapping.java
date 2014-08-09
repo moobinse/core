@@ -17,7 +17,6 @@ import com.moobin.tools.InputXmlTool;
 
 public class XmlInputMapping<T> {
 
-	private static Map<Class<?>, XmlInputMapping<?>> map = new HashMap<>();
 	private Class<T> type;
 	private Map<String, FieldMapping> fieldMappings = new HashMap<>();
 	private MetaDataObject<T> meta;
@@ -44,11 +43,10 @@ public class XmlInputMapping<T> {
 		// dummy object, for instantiating EntityMaps
 	}
 	
-	private XmlInputMapping(Class<T> type, String xpath) {
+	public XmlInputMapping(Class<T> type, String xpath) {
 		this.type = type;
-		this.xpath = xpath;
+		this.xpath = xpath; 
 		meta = Core.get().getMetaDataManager().getMetaData(type);
-		map.put(type, this);
 	}
 	
 	public XmlInputMapping<T> map(String field, String xpath) {
@@ -83,15 +81,8 @@ public class XmlInputMapping<T> {
 		return new XmlInputMapping<T>(type, xpath);
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static <T> XmlInputMapping<T> get(Class<T> type) {
-		return (XmlInputMapping<T>) map.get(type);
-	}
-
-	public static Stream<?> parseDocument(Document doc) {
-		List<Object> items = new ArrayList<>();
-		map.values().forEach((em) -> items.addAll(em.inspect(doc)));
-		return items.stream();
+	public Stream<T> parseDocument(Document doc) {
+		return inspect(doc).stream();
 	}
 
 }

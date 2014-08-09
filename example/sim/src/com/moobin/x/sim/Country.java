@@ -27,10 +27,10 @@ public class Country {
 	public String iso3166_2;
 
 	@BtNumber(min=0, max=100)
-	public int region;
+	public Integer region;
 	
 	@BtNumber(min=0, max=1000)
-	public int subRegion;
+	public Integer subRegion;
 	
 	@Override
 	public String toString() {
