@@ -1,30 +1,29 @@
 package com.moobin.output.test;
 
+import com.moobin.cache.impl.CacheManagerImpl;
 import com.moobin.configuration.MoobinConfiguration;
-import com.moobin.configuration.MoobinConfigurationSource;
-import com.moobin.configuration.impl.AbstractMoobinConfigurationSource;
+import com.moobin.configuration.impl.AbstractMoobinConfiguration;
+import com.moobin.configuration.impl.MoobinConfigurationImpl;
 import com.moobin.core.Core;
 import com.moobin.meta.MetaDataManagerImpl;
 import com.moobin.output.js.MoobinFromJson;
 import com.moobin.output.js.MoobinFromXml;
 import com.moobin.output.js.MoobinToJson;
+import com.moobin.tools.MoobinConfigurationTool;
 
 public class TestOutput {
 
 	static {
-		MoobinConfigurationSource config = new AbstractMoobinConfigurationSource() {
+		MoobinConfiguration config = new AbstractMoobinConfiguration() {
 			{
 				addMetaEntity(InOutTest.class);
 			}
 		};
 		Core.get().set(new MetaDataManagerImpl());
-		Core.get().set(new MoobinConfiguration() {
-			@Override
-			public MoobinConfigurationSource source() {
-				return config;
-			}
-		});
+		Core.get().set(new CacheManagerImpl());
+		Core.get().set(new MoobinConfigurationImpl(config));
 		Core.get().start();
+		MoobinConfigurationTool.toXml(config, System.out);
 	}
 	
 	public static void main(String[] args) {

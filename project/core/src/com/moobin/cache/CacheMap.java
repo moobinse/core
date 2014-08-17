@@ -1,5 +1,6 @@
 package com.moobin.cache;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -37,6 +38,12 @@ public interface CacheMap<T> {
 	 * @return
 	 */
 	List<T> get(String... key);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	Collection<T> values();
 
 	/**
 	 * @param item

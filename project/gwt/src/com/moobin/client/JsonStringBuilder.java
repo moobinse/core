@@ -1,5 +1,6 @@
 package com.moobin.client;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 
 public class JsonStringBuilder {
@@ -12,7 +13,14 @@ public class JsonStringBuilder {
 
 	private JsonStringBuilder(Object o) {
 		buffer = new StringBuffer();
-		addObject(o);
+		if (isArray(o)) {
+			JsBase t = JavaScriptObject.createObject().cast();
+			t.set("arr", (JavaScriptObject) o);
+			addArray(t, "arr");
+		}
+		else {
+			addObject(o);
+		}
 	}
 
 	private void add(Object o, String key) {
@@ -75,6 +83,9 @@ public class JsonStringBuilder {
 		return typeof o[p] == "boolean";
 	}-*/;
 
+	private static native boolean isArray(Object o) /*-{
+		return Array.isArray(o);
+	}-*/;
 	private static native boolean isArray(Object o, String p) /*-{
 		return Array.isArray(o[p]);
 	}-*/;

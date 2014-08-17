@@ -5,5 +5,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/moobin configuration"/>
 	<classpathentry kind="src" path="/moobin 3p"/>
+	<classpathentry kind="src" path="/moobin cache"/>
+	<classpathentry kind="lib" path="D:/moobin/copy/gwt-2.6.1/gwt-user.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

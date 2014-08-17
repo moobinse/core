@@ -17,6 +17,7 @@ import com.moobin.core.MoobinException;
 
 public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 
+	private Class<T> type;
 	private String name;
 	private MetaDataField<String, T> displayField;
 	private MetaDataField<String, T> keyField;
@@ -29,6 +30,7 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	private Constructor<T> constructor;
 	
 	public MetaDataObjectImpl(Class<T> clazz) {
+		type = clazz;
 		name = clazz.getSimpleName();
 		Arrays.asList(clazz.getFields()).forEach(this::add);
 		try {
@@ -36,6 +38,11 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 		} catch (NoSuchMethodException | SecurityException e) {
 			throw new MoobinException(e);
 		}
+	}
+	
+	@Override
+	public Class<T> getType() {
+		return type;
 	}
 	
 	@SuppressWarnings("unchecked")

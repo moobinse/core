@@ -36,6 +36,11 @@ public class MetaDataManagerImpl implements MetaDataManager {
 	}
 
 	@Override
+	public <T> MetaDataObject<T> getMetaData(String type) {
+		return (MetaDataObject<T>) nameMap.get(type);
+	}
+
+	@Override
 	public void add(Class<?> clazz) {
 		MetaDataObject<?> meta = createMetaDataObject(clazz);
 		classMap.put(clazz, meta);

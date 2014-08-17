@@ -1,6 +1,7 @@
 package com.moobin.cache.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -127,9 +128,10 @@ public class CacheMapImpl<T> implements CacheMap<T> {
 			throw new MoobinException("");
 		}
 	}
-	
-	Stream<T> values() {
-		return map.values().stream();
+
+	@Override
+	public Collection<T> values() {
+		return map.values();
 	}
 
 	@Override

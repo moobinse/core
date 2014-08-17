@@ -4,7 +4,6 @@
 	<classpathentry kind="src" output="test-classes" path="test"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="/moobin example generate"/>
 	<classpathentry kind="src" path="/moobin client"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/moobin gwt"/>
 	<classpathentry kind="src" path="/moobin core"/>
@@ -13,5 +12,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/moobin 3p"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/moobin configuration"/>
 	<classpathentry kind="src" path="/moobin cache"/>
+	<classpathentry kind="src" path="/moobin-x simulation"/>
+	<classpathentry kind="src" path="/moobin-x client"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

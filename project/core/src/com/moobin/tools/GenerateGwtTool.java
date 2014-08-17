@@ -23,6 +23,7 @@ public abstract class GenerateGwtTool {
 			writer.write("package com.moobin.generated.client.cache;\n\n");
 			writer.write("import java.util.Collection;\n");
 			writer.write("import java.util.List;\n");
+			writer.write("import com.google.gwt.core.client.JsArray;\n");
 			writer.write("import com.moobin.client.CacheCallback;\n");
 			writer.write("import com.moobin.client.CacheSubscription;\n");
 			writer.write("import com.moobin.client.Moobin;\n\n");
@@ -34,7 +35,7 @@ public abstract class GenerateGwtTool {
 				writer.write("    public static void get" + meta.getName() + "List(Collection<String> keys, CacheCallback<List<Js" + meta.getName() + ">> callback) {\n");
 				writer.write("        Moobin.getCache().getList(\"" + meta.getName() + "\", keys, callback);\n");
 				writer.write("    }\n");
-				writer.write("    public static void get" + meta.getName() + "List(CacheCallback<List<Js" + meta.getName() + ">> callback) {\n");
+				writer.write("    public static void get" + meta.getName() + "List(CacheCallback<JsArray<Js" + meta.getName() + ">> callback) {\n");
 				writer.write("        Moobin.getCache().getList(\"" + meta.getName() + "\", callback);\n");
 				writer.write("    }\n");
 				writer.write("    public static void subscribe" + meta.getName() + "(String key, CacheSubscription<Js" + meta.getName() + "> subscription) {\n");
@@ -65,7 +66,10 @@ public abstract class GenerateGwtTool {
 			    	String n = f.getName();
 					String name = n.substring(0, 1).toUpperCase() + n.substring(1);
 					String type = f.getJavaType().getSimpleName() + (f.isArray() ? "[]" : "");
-					if (f.getType() == Type.OBJECT) {
+					if (type.equals("Object")) {
+						type = "JavaScriptObject";
+					}
+					else if (f.getType() == Type.OBJECT) {
 						type = "Js" + type;
 					}
 					writer.write("\n");
@@ -113,7 +117,7 @@ public abstract class GenerateGwtTool {
 						if (f.getType() == Type.OBJECT) {
 							writer.write("        return getObject(\"" + n + "\");\n");
 						}
-						else if (f.getJavaType() == int.class) {
+						else if (f.getJavaType() == int.class || f.getJavaType() == Integer.class) {
 							writer.write("        return getInteger(\"" + n + "\");\n");
 						}
 						else if (f.getJavaType() == boolean.class) {

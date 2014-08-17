@@ -56,20 +56,20 @@ public class JsCountry extends JsBase {
     }
 
 
-    public final int getRegion() {
+    public final Integer getRegion() {
         return getInteger("region");
     }
 
-    public final void  setRegion(int region) {
+    public final void  setRegion(Integer region) {
         set("region", region);
     }
 
 
-    public final int getSubRegion() {
+    public final Integer getSubRegion() {
         return getInteger("subRegion");
     }
 
-    public final void  setSubRegion(int subRegion) {
+    public final void  setSubRegion(Integer subRegion) {
         set("subRegion", subRegion);
     }
 

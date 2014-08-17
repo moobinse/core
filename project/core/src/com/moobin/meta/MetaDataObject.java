@@ -6,6 +6,8 @@ public interface MetaDataObject<T> {
 	
 	String getName();
 
+	Class<T> getType();
+
 	MetaDataField<String, T> getKeyField();
 	
 	MetaDataField<String, T> getDisplayField();
@@ -27,5 +29,5 @@ public interface MetaDataObject<T> {
 	List<MetaDataField<?,T>> getObjectArrayFields();
 
 	T create();
-	
+
 }

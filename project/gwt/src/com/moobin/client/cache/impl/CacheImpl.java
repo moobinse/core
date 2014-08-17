@@ -2,6 +2,7 @@ package com.moobin.client.cache.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -11,7 +12,7 @@ import com.moobin.client.CacheCallback;
 import com.moobin.client.CacheSubscription;
 import com.moobin.client.HandlerRegistration;
 import com.moobin.client.JsBase;
-import com.moobin.client.message.Messaging;
+import com.moobin.client.message.PollServiceIf;
 
 public class CacheImpl implements AsyncCache<JsBase> {
 	
@@ -24,21 +25,26 @@ public class CacheImpl implements AsyncCache<JsBase> {
 		send(request, new CacheCallback<CacheResponse<T>>() {
 			@Override
 			public void callback(CacheResponse<T> result) {
-				callback.callback(result.value());
+				callback.callback(result.getValue());
 			}
 		});
 	} 
 
 	@Override
-	public <T extends JsBase> void getList(String type, Collection<String> keys,
-			final CacheCallback<List<T>> callback) {
+	public <R> void getList(String type, Collection<String> keys,
+			final CacheCallback<R> callback) {
 		CacheRequest request = CacheRequest.create(type, keys);
-		send(request, new CacheCallback<CacheResponse<JsArray<T>>>() {
+		send(request, new CacheCallback<CacheResponse<R>>() {
 			@Override
-			public void callback(CacheResponse<JsArray<T>> result) {
-				callback.callback(makeList(result.value()));
+			public void callback(CacheResponse<R> result) {
+				if (result == null) {
+					callback.callback(null);
+				}
+				else {
+					callback.callback(result.getValue());
+				}
 			}
-		});
+		}); 
 	}
 	
 	private static <T extends JsBase> List<T> makeList(JsArray<T> arr) {
@@ -50,7 +56,7 @@ public class CacheImpl implements AsyncCache<JsBase> {
 	}
 
 	@Override
-	public <T extends JsBase> void getList(String type, final CacheCallback<List<T>> callback) {
+	public <R> void getList(String type, final CacheCallback<R> callback) {
 		getList(type, null, callback);
 	}
 
@@ -69,8 +75,8 @@ public class CacheImpl implements AsyncCache<JsBase> {
 		
 	}
 	
-	private <T extends JavaScriptObject> void send(CacheRequest request, CacheCallback<CacheResponse<T>> callback) {
-		Messaging.get().add(request, callback);
+	private <T> void send(CacheRequest request, CacheCallback<CacheResponse<T>> callback) {
+		PollServiceIf.Singleton.get().add(request, callback);
 	}
 	
 }

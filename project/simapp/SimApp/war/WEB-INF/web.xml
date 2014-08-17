@@ -6,12 +6,25 @@
 
 	<!-- Servlets -->
 	<servlet>
-		<servlet-name>HelloServletName</servlet-name>
-		<servlet-class>com.moobin.example.sim.server.MoobinServlet</servlet-class>
+		<servlet-name>InitServlet</servlet-name>
+		<servlet-class>com.moobin.example.sim.server.SimInitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>Rest</servlet-name>
+		<servlet-class>com.moobin.servlet.RestServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Poll</servlet-name>
+		<servlet-class>com.moobin.servlet.PollServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>HelloServletName</servlet-name>
-		<url-pattern>/hello</url-pattern>
+		<servlet-name>Rest</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Poll</servlet-name>
+		<url-pattern>/poll/*</url-pattern>
 	</servlet-mapping>
 	<!-- Default page to serve -->
 	<welcome-file-list>

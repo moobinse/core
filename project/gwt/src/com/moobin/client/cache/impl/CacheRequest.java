@@ -28,12 +28,15 @@ public class CacheRequest extends JsBase {
 	}
 
 	public static CacheRequest create(String type, Collection<String> keys) {
-		JsArrayString arr = JsArrayString.createArray().cast();
-		for (String key : keys) {
-			arr.push(key);
-		}
 		CacheRequest req = JavaScriptObject.createObject().cast();
-		req.set("keys", arr);
+		req.set("type", type);
+		if (keys != null) {
+			JsArrayString arr = JsArrayString.createArray().cast();
+			for (String key : keys) {
+				arr.push(key);
+			}
+			req.set("keys", arr);
+		}
 		return req;
 	}
 

@@ -13,7 +13,7 @@ public interface CacheRootMap<T> extends CacheMap<T> {
 	 * @param key
 	 */
 	T remove(String key);
-	
+
 	/**
 	 * Remove item
 	 * @param item
@@ -36,4 +36,5 @@ public interface CacheRootMap<T> extends CacheMap<T> {
 	default void remove(Stream<T> items) {
 		items.forEach(this::remove);
 	}
+
 }

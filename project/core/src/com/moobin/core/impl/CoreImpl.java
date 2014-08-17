@@ -1,14 +1,17 @@
 package com.moobin.core.impl;
 
 import com.moobin.cache.CacheManager;
-import com.moobin.configuration.MoobinConfiguration;
+import com.moobin.configuration.ConfigurationManager;
 import com.moobin.core.Core;
+import com.moobin.core.MoobinException;
+import com.moobin.core.data.MetaObject;
+import com.moobin.feed.MoobinFeeder;
 import com.moobin.meta.MetaDataManager;
 
 public class CoreImpl implements Core {
 
 	
-	private MoobinConfiguration configuration;
+	private ConfigurationManager configuration;
 	private MetaDataManager metaDataManager;
 	private CacheManager cacheManager;
 
@@ -22,7 +25,7 @@ public class CoreImpl implements Core {
 	}
 	
 	@Override
-	public MoobinConfiguration getConfiguration() {
+	public ConfigurationManager getConfiguration() {
 		return configuration;
 	}
 
@@ -31,6 +34,8 @@ public class CoreImpl implements Core {
 		configuration.source().getAllTypes().forEach(metaDataManager::add);
 		configuration.source().getCacheRoots().forEach((c) -> cacheManager.createRootMap(c));
 		configuration.source().start();
+		metaDataManager.getMetaData().stream().map(MetaObject::create).forEach(cacheManager::add);
+		configuration.source().getAllFeeders().forEach(this::startFeed);
 	}
 	
 	@Override
@@ -41,10 +46,20 @@ public class CoreImpl implements Core {
 		if (manager instanceof CacheManager) {
 			cacheManager = (CacheManager) manager;
 		}
-		if (manager instanceof MoobinConfiguration) {
-			configuration = (MoobinConfiguration) manager;
+		if (manager instanceof ConfigurationManager) {
+			configuration = (ConfigurationManager) manager;
 		}
 		return manager;
+	}
+	
+	private void startFeed(Class<? extends MoobinFeeder> clazz) {
+		try {
+			MoobinFeeder feeder = clazz.newInstance();
+			feeder.start();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+			throw new MoobinException("Cannot instantiate feeder: " + clazz.getName());
+		}
 	}
 	
 }

@@ -11,6 +11,8 @@ public interface MetaDataManager {
 	Collection<MetaDataObject<?>> getMetaData();
 
 	<T> MetaDataObject<T> getMetaData(Class<T> type);
+
+	<T> MetaDataObject<T> getMetaData(String type);
 	
 	<T> MetaDataObject<T> createMetaDataObject(Class<T> clazz);
 	

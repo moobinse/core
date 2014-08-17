@@ -47,7 +47,7 @@ public class MoobinFromJson<T> {
 	private List<Object> jsonArrayToList(JSONArray array, Class<?> type) {
 		List<Object> list = new ArrayList<>();
 		for (int i = 0; i < array.length(); i++) {
-			list.add(array.get(i));
+			list.add(parse(type, (JSONObject) array.get(i)));
 		}
 		return list;
 	}

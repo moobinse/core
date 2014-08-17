@@ -1,4 +1,4 @@
-package com.moobin.x.sim.configuration;
+package com.moobin.x.sim.feed;
 
 import com.moobin.input.xml.XmlInputMapping;
 import com.moobin.x.sim.Country;

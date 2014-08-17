@@ -1,18 +1,18 @@
 package com.moobin.configuration.impl;
 
+import com.moobin.configuration.ConfigurationManager;
 import com.moobin.configuration.MoobinConfiguration;
-import com.moobin.configuration.MoobinConfigurationSource;
 
-public class MoobinConfigurationImpl implements MoobinConfiguration {
+public class MoobinConfigurationImpl implements ConfigurationManager {
 
-	private MoobinConfigurationSource source;
+	private MoobinConfiguration source;
 
-	public MoobinConfigurationImpl(MoobinConfigurationSource source) {
+	public MoobinConfigurationImpl(MoobinConfiguration source) {
 		this.source = source;
 	}
 	
 	@Override
-	public MoobinConfigurationSource source() {
+	public MoobinConfiguration source() {
 		return source;
 	}
 	

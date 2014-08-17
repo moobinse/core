@@ -56,6 +56,6 @@ public class JsCurrency extends JsBase {
     public final void  setIntArr(int... intArr) {
         JsArrayInteger arr = createArray().cast();
         for (int i : intArr) arr.push(i);
-        setIntArr(arr);
+	      setIntArr(arr);
     }
 }
