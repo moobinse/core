@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gwt.thirdparty.guava.common.base.Charsets;
 import com.moobin.cache.CacheRootMap;
 import com.moobin.core.Core;
 import com.moobin.core.data.CacheRequest;
@@ -19,16 +20,15 @@ import com.moobin.meta.MetaDataObject;
 import com.moobin.output.js.MoobinFromJson;
 import com.moobin.output.js.MoobinToJson;
 
-import sun.misc.IOUtils;
-
 @SuppressWarnings("serial")
 public class PollServlet extends javax.servlet.http.HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	    response.setContentType("text/plain");
-	    
+//	    response.setContentType("text/plain");
+//	    response.setCharacterEncoding("UTF-8");
+	    response.setHeader("content-type", "application/json; charset=UTF-8");
 	    StringBuilder inputStringBuilder = new StringBuilder();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
         String line = bufferedReader.readLine();
@@ -55,8 +55,7 @@ public class PollServlet extends javax.servlet.http.HttpServlet {
     	    }
     	    pollRsp.cacheResponses[i] = rsp;
         }
-        System.out.println(MoobinToJson.format(pollRsp));
-	    response.getOutputStream().print(MoobinToJson.format(pollRsp));
+	    response.getOutputStream().write(MoobinToJson.format(pollRsp).getBytes(Charsets.UTF_8));
 	}
 	
 }

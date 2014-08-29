@@ -12,6 +12,8 @@ public interface MetaDataObject<T> {
 	
 	MetaDataField<String, T> getDisplayField();
 	
+	boolean isCacheRoot();
+	
 	<V> MetaDataField<V, T> getField(String field);
 
 	default <V extends Comparable<V>> MetaDataField<V, T> getComparableField(String field) {
@@ -29,5 +31,7 @@ public interface MetaDataObject<T> {
 	List<MetaDataField<?,T>> getObjectArrayFields();
 
 	T create();
+
+	void setCacheRoot(boolean b);
 
 }

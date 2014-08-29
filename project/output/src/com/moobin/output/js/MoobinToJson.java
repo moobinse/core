@@ -8,7 +8,6 @@ import java.util.List;
 import org.json.JSONObject;
 
 import com.moobin.core.Core;
-import com.moobin.core.MoobinException;
 import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataField.Type;
 import com.moobin.meta.MetaDataObject;

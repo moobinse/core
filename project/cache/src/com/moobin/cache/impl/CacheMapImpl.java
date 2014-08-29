@@ -32,6 +32,7 @@ public class CacheMapImpl<T> implements CacheMap<T> {
 	public CacheMapImpl(Class<T> type) {
 		this.type = type;
 		meta = Core.get().getMetaDataManager().getMetaData(type);
+		meta.setCacheRoot(true);
 		this.keyFunction = meta.getKeyField()::get;
 		this.textFunction = meta.getDisplayField()::get;
 	}

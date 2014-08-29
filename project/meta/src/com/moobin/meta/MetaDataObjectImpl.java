@@ -21,6 +21,7 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	private String name;
 	private MetaDataField<String, T> displayField;
 	private MetaDataField<String, T> keyField;
+	private boolean cacheRoot;
 	private List<MetaDataField<?, T>> allFields = new ArrayList<MetaDataField<?,T>>();
 	private List<MetaDataField<?, T>> simpleFields = new ArrayList<MetaDataField<?,T>>();
 	private List<MetaDataField<?, T>> objectFields = new ArrayList<MetaDataField<?,T>>();
@@ -103,6 +104,11 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	public MetaDataField<String, T> getDisplayField() {
 		return displayField;
 	}
+	
+	@Override
+	public boolean isCacheRoot() {
+		return cacheRoot;
+	}
 
 	@Override
 	public List<MetaDataField<?, T>> getSimpleFields() {
@@ -124,5 +130,9 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 		return objectArrayFields;
 	}
 
+	@Override
+	public void setCacheRoot(boolean b) {
+		cacheRoot = b;
+	}
 	
 }

@@ -19,7 +19,6 @@ import com.moobin.client.cache.impl.CacheRequest;
 import com.moobin.client.message.PollServiceIf;
 import com.moobin.generated.client.cache.JsCacheResponse;
 import com.moobin.generated.client.cache.JsPollResponse;
-import com.moobin.output.js.MoobinToJson;
 
 public class PollService implements PollServiceIf {
 
@@ -35,10 +34,10 @@ public class PollService implements PollServiceIf {
 					send();
 					requests = new ArrayList<>();
 				}
-				schedule(1000);
+				schedule(100);
 			}
 		};
-		timer.schedule(1000);
+		timer.schedule(100);
 		
 	}
 	
@@ -62,7 +61,8 @@ public class PollService implements PollServiceIf {
 				
 				@Override
 				public void onResponseReceived(Request request, Response response) {
-					JsPollResponse rsp = eval(response.getText()).cast();
+					String text = response.getText();
+					JsPollResponse rsp = eval(text).cast();
 					JsArray<JsCacheResponse> crsp = rsp.getCacheResponses().cast();
 					for (int i = 0; i < crsp.length(); i++) {
 						try {
@@ -86,12 +86,9 @@ public class PollService implements PollServiceIf {
 	}
 	
 	<T> void response(int handle, T value) {
-		System.out.println(JsonStringBuilder.toJson(value));
 		@SuppressWarnings("unchecked")
 		CacheCallback<T> cb = (CacheCallback<T>) callbacks.remove(handle);
-		JsCacheResponse rsp = JavaScriptObject.createObject().cast();
-		rsp.setValue((JavaScriptObject) value); 
-		cb.callback((T) rsp);
+		cb.callback((T) value);
 	}
 
 	static native JavaScriptObject eval(String s) /*-{

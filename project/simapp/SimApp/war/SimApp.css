@@ -1,34 +1,46 @@
-/** Add css rules here for your application. */
 
-
-/** Example rules used by the template application (remove for your app) */
-h1 {
-  font-size: 2em;
-  font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
+.MetaObjectView {
+	border: outset 1px;
+	background: #eee;
+	padding: 8px;
+}
+.MetaObjectView .gwt-Label {
+	font-weight: bold;
+	padding-left: 20px;
 }
 
-.sendButton {
-  display: block;
-  font-size: 16pt;
+.MetaObjectView table {
+	border-top : dotted 1px;
 }
 
-/** Most GWT widgets already have a style name defined */
-.gwt-DialogBox {
-  width: 400px;
+.MTable {
+	
+	height: 200px;
+	overflow: auto;
+	border: solid black 1px;
+	margin: 8px;
 }
 
-.dialogVPanel {
-  margin: 5px;
+.MTable > table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
-.serverResponseLabelError {
-  color: red;
+.MTable > table tr:FIRST-CHILD td {
+	background-color: lightblue;
+	padding: 4px;
+	border-right: solid white 1px;
 }
 
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-  margin: 15px 6px 6px;
+.MTable > table tr td {
+	padding: 2px 4px 2px 4px;
+	border-bottom: solid #eee 1px;
+}
+
+.MTable > table tr:HOVER {
+	background-color: #eee;
+}
+.MTable > table td:HOVER {
+	background-color: #ddd;
 }

@@ -32,7 +32,7 @@ public class CoreImpl implements Core {
 	@Override
 	public void start() {
 		configuration.source().getAllTypes().forEach(metaDataManager::add);
-		configuration.source().getCacheRoots().forEach((c) -> cacheManager.createRootMap(c));
+		configuration.source().getAllCacheRoots().forEach((c) -> cacheManager.createRootMap(c));
 		configuration.source().start();
 		metaDataManager.getMetaData().stream().map(MetaObject::create).forEach(cacheManager::add);
 		configuration.source().getAllFeeders().forEach(this::startFeed);

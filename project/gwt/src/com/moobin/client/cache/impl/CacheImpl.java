@@ -1,12 +1,7 @@
 package com.moobin.client.cache.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
 import com.moobin.client.AsyncCache;
 import com.moobin.client.CacheCallback;
 import com.moobin.client.CacheSubscription;
@@ -22,10 +17,10 @@ public class CacheImpl implements AsyncCache<JsBase> {
 	public <T extends JsBase> void get(String type, String key, final CacheCallback<T> callback) {
 		
 		CacheRequest request = CacheRequest.create(type, key);
-		send(request, new CacheCallback<CacheResponse<T>>() {
+		send(request, new CacheCallback<T>() {
 			@Override
-			public void callback(CacheResponse<T> result) {
-				callback.callback(result.getValue());
+			public void callback(T result) {
+				callback.callback(result);
 			}
 		});
 	} 
@@ -34,27 +29,19 @@ public class CacheImpl implements AsyncCache<JsBase> {
 	public <R> void getList(String type, Collection<String> keys,
 			final CacheCallback<R> callback) {
 		CacheRequest request = CacheRequest.create(type, keys);
-		send(request, new CacheCallback<CacheResponse<R>>() {
+		send(request, new CacheCallback<R>() {
 			@Override
-			public void callback(CacheResponse<R> result) {
+			public void callback(R result) {
 				if (result == null) {
 					callback.callback(null);
 				}
 				else {
-					callback.callback(result.getValue());
+					callback.callback(result);
 				}
 			}
 		}); 
 	}
 	
-	private static <T extends JsBase> List<T> makeList(JsArray<T> arr) {
-		List<T> list = new ArrayList<>();
-		for (int i = 0; i < arr.length(); i++) {
-			list.add(arr.get(i));
-		}
-		return list;
-	}
-
 	@Override
 	public <R> void getList(String type, final CacheCallback<R> callback) {
 		getList(type, null, callback);
@@ -75,7 +62,7 @@ public class CacheImpl implements AsyncCache<JsBase> {
 		
 	}
 	
-	private <T> void send(CacheRequest request, CacheCallback<CacheResponse<T>> callback) {
+	private <T> void send(CacheRequest request, CacheCallback<T> callback) {
 		PollServiceIf.Singleton.get().add(request, callback);
 	}
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <countries>
   <country name="Afghanistan" alpha-2="AF" alpha-3="AFG" country-code="004" iso_3166-2="ISO 3166-2:AF" region-code="142" sub-region-code="034"/>
-  <country name="Åland Islands" alpha-2="AX" alpha-3="ALA" country-code="248" iso_3166-2="ISO 3166-2:AX" region-code="150" sub-region-code="154"/>
+  <country name="Åland Islands" alpha-2="AX" alpha-3="&quot;หมูบิน" country-code="248" iso_3166-2="ISO 3166-2:AX" region-code="150" sub-region-code="154"/>
   <country name="Albania" alpha-2="AL" alpha-3="ALB" country-code="008" iso_3166-2="ISO 3166-2:AL" region-code="150" sub-region-code="039"/>
   <country name="Algeria" alpha-2="DZ" alpha-3="DZA" country-code="012" iso_3166-2="ISO 3166-2:DZ" region-code="002" sub-region-code="015"/>
   <country name="American Samoa" alpha-2="AS" alpha-3="ASM" country-code="016" iso_3166-2="ISO 3166-2:AS" region-code="009" sub-region-code="061"/>
@@ -214,7 +214,7 @@
   <country name="Suriname" alpha-2="SR" alpha-3="SUR" country-code="740" iso_3166-2="ISO 3166-2:SR" region-code="019" sub-region-code="005"/>
   <country name="Svalbard and Jan Mayen" alpha-2="SJ" alpha-3="SJM" country-code="744" iso_3166-2="ISO 3166-2:SJ" region-code="150" sub-region-code="154"/>
   <country name="Swaziland" alpha-2="SZ" alpha-3="SWZ" country-code="748" iso_3166-2="ISO 3166-2:SZ" region-code="002" sub-region-code="018"/>
-  <country name="Sweden" alpha-2="SE" alpha-3="SWE" country-code="752" iso_3166-2="ISO 3166-2:SE" region-code="150" sub-region-code="154"/>
+  <country name="Sweden" alpha-2="SEÅö" alpha-3="&quot;SWE" country-code="752" iso_3166-2="ISO 3166-2:SE" region-code="150" sub-region-code="154"/>
   <country name="Switzerland" alpha-2="CH" alpha-3="CHE" country-code="756" iso_3166-2="ISO 3166-2:CH" region-code="150" sub-region-code="155"/>
   <country name="Syrian Arab Republic" alpha-2="SY" alpha-3="SYR" country-code="760" iso_3166-2="ISO 3166-2:SY" region-code="142" sub-region-code="145"/>
   <country name="Taiwan, Province of China" alpha-2="TW" alpha-3="TWN" country-code="158" iso_3166-2="ISO 3166-2:TW" region-code="142" sub-region-code="030"/>

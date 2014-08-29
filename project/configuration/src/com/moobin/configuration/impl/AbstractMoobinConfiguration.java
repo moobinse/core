@@ -19,10 +19,10 @@ import com.moobin.feed.MoobinFeeder;
 public class AbstractMoobinConfiguration implements MoobinConfiguration {
 
 	private final List<MoobinConfiguration> inherits = new ArrayList<>();
-	private final HashSet<Class<?>> metaEntities = new HashSet<>();
+	private final Map<Class<?>, String> metaEntities = new HashMap<>();
 	private final List<AddField<?,?>> addedFields = new ArrayList<>();
-	private final HashSet<Class<?>> cacheRootSet = new HashSet<>();
-	private final HashSet<Class<? extends MoobinFeeder>> feeders = new HashSet<>();
+	private final Set<Class<?>> cacheRootSet = new HashSet<>();
+	private final Set<Class<? extends MoobinFeeder>> feeders = new HashSet<>();
 	private static final Map<Class<? extends MoobinConfiguration>, MoobinConfiguration> map 
 		= new HashMap<>();
 	
@@ -44,7 +44,7 @@ public class AbstractMoobinConfiguration implements MoobinConfiguration {
 	
 	@Override
 	public Set<Class<?>> getTypes() {
-		return metaEntities;
+		return metaEntities.keySet();
 	}
 	
 	@Override
@@ -63,8 +63,7 @@ public class AbstractMoobinConfiguration implements MoobinConfiguration {
 	}
 	
 	protected void inherits(Class<? extends MoobinConfiguration> clazz) {
-		MoobinConfiguration source = MoobinConfiguration.getConfig(clazz);
-		inherits.add(source);
+		inherits.add(MoobinConfiguration.getConfig(clazz));
 	}
 
 	protected void addMetaEntity(Class<?>... types) {
@@ -72,9 +71,9 @@ public class AbstractMoobinConfiguration implements MoobinConfiguration {
 	}
 
 	protected void addMetaEntity(String domain, Class<?>... types) {
-		Arrays.asList(types).forEach(metaEntities::add);
+		Arrays.asList(types).forEach((t) -> metaEntities.put(t, domain));
 	}
-
+	
 	protected <T,R> void addMetaDataField(Class<T> type, String name, Class<R> valueType, Function<T,R> method) {
 		addedFields.add(new AddField<T,R>(type, name, valueType, method));
 	}
@@ -89,7 +88,6 @@ public class AbstractMoobinConfiguration implements MoobinConfiguration {
 	
 	protected void addCacheRoot(Class<?>...types) {
 		Arrays.asList(types).forEach(cacheRootSet::add);
-		Arrays.asList(types).forEach(metaEntities::add);
 	}
 	
 	

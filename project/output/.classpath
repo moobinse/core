@@ -6,6 +6,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/moobin configuration"/>
 	<classpathentry kind="src" path="/moobin 3p"/>
 	<classpathentry kind="src" path="/moobin cache"/>
-	<classpathentry kind="lib" path="D:/moobin/copy/gwt-2.6.1/gwt-user.jar"/>
+	<classpathentry kind="lib" path="C:/moobinse/git/gwt-2.6.1/gwt-user.jar"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

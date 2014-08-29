@@ -11,8 +11,12 @@ public class JsBase extends JavaScriptObject {
 	protected JsBase() {
 		
 	}
+	
+	protected final native boolean isNull(String p) /*-{
+		return this[p] == null;
+	}-*/;
 
-	protected final native String get(String p) /*-{ return this[p]; }-*/;
+	public final native String get(String p) /*-{ return this[p]; }-*/;
 
     protected final <T extends JsBase> void get(String type, String key, CacheCallback<T> callback) {
     	Moobin.getCache().get(type, key, callback);
