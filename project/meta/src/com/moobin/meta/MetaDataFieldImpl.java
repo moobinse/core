@@ -31,6 +31,7 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 	
 	private Class<?> javaType;
 	Field field;
+ 	private MetaDataObject<T> parent;
 
 	private static final List<Class<?>> numberTypes = Arrays.asList(Integer.class, int.class, Long.class, long.class, Byte.class, byte.class, Short.class, short.class);
 	private static final List<Class<?>> decimalTypes = Arrays.asList(Double.class, double.class, Float.class, float.class);
@@ -44,6 +45,7 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	MetaDataFieldImpl(MetaDataObject<T> parent, Field field) {
 		this.field = field;
+		this.parent = parent;
 		objectName = parent.getName();
 		fieldName = field.getName();
 		Class<?> datatype = field.getType();
@@ -98,6 +100,11 @@ public class MetaDataFieldImpl<F,T> implements MetaDataField<F, T> {
 	private void setBusinessType(MetaBusinessType<?> businessType) {
 		assert this.businessType == null;
 		this.businessType = businessType;
+	}
+
+	@Override
+	public MetaDataObject<T> getParent() {
+ 		return parent;
 	}
 	
 	@Override

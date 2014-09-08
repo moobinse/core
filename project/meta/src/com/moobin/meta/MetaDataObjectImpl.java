@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.moobin.annotation.Action;
 import com.moobin.annotation.Id;
 import com.moobin.annotation.bt.BtDisplay;
 import com.moobin.core.Core;
@@ -22,6 +23,7 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	private MetaDataField<String, T> displayField;
 	private MetaDataField<String, T> keyField;
 	private boolean cacheRoot;
+	private List<String> defaultActions;
 	private List<MetaDataField<?, T>> allFields = new ArrayList<MetaDataField<?,T>>();
 	private List<MetaDataField<?, T>> simpleFields = new ArrayList<MetaDataField<?,T>>();
 	private List<MetaDataField<?, T>> objectFields = new ArrayList<MetaDataField<?,T>>();
@@ -33,6 +35,7 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 	public MetaDataObjectImpl(Class<T> clazz) {
 		type = clazz;
 		name = clazz.getSimpleName();
+		defaultActions = getActions(clazz);
 		Arrays.asList(clazz.getFields()).forEach(this::add);
 		try {
 			this.constructor = clazz.getConstructor();
@@ -41,9 +44,25 @@ public class MetaDataObjectImpl<T> implements MetaDataObject<T> {
 		}
 	}
 	
+	protected List<String> getActions(Class<T> clazz) {
+		List<String> list = new ArrayList<>();
+		Action annotation = clazz.getAnnotation(Action.class);
+		if (annotation != null) {
+			for (String action : annotation.value()) {
+				list.add(action);
+			}
+		}
+		return list;
+	}
+	
 	@Override
 	public Class<T> getType() {
 		return type;
+	}
+	
+	@Override
+	public List<String> getActions() {
+		return defaultActions;
 	}
 	
 	@SuppressWarnings("unchecked")

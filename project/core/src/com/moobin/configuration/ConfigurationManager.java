@@ -4,4 +4,6 @@ public interface ConfigurationManager {
 
 	MoobinConfiguration source();
 
+	String getName();
+
 }

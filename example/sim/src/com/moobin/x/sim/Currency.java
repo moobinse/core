@@ -1,13 +1,14 @@
 package com.moobin.x.sim;
 
+import com.moobin.annotation.Action;
 import com.moobin.annotation.Id;
-import com.moobin.annotation.ReadOnly;
 import com.moobin.annotation.bt.BtDisplay;
 import com.moobin.annotation.bt.BtNumber;
 import com.moobin.annotation.bt.BtText;
+import com.moobin.core.data.MetaAction;
 import com.moobin.object.MoobinObject;
 
-@ReadOnly
+@Action({MetaAction.ADD, MetaAction.GET, MetaAction.UPDATE, MetaAction.REMOVE})
 public class Currency extends MoobinObject {
 	
 	@Id

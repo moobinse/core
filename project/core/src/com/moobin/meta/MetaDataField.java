@@ -23,5 +23,7 @@ public interface MetaDataField<F,T> {
 
 	void set(T item, Object value);
 
+	MetaDataObject<T> getParent();
+
 
 }

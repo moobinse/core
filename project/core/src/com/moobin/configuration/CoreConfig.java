@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import com.moobin.core.data.CacheRequest;
 import com.moobin.core.data.CacheResponse;
+import com.moobin.core.data.MetaAction;
 import com.moobin.core.data.MetaField;
 import com.moobin.core.data.MetaObject;
 import com.moobin.core.data.PollRequest;
@@ -21,6 +22,7 @@ public class CoreConfig implements MoobinConfiguration {
 	private final List<Class<?>> cacheRoots = new ArrayList<>();
 	
 	public CoreConfig() {
+		types.add(MetaAction.class);
 		types.add(MetaObject.class);
 		types.add(MetaField.class);
 		types.add(CacheRequest.class);

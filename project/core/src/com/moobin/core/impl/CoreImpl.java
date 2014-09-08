@@ -34,7 +34,7 @@ public class CoreImpl implements Core {
 		configuration.source().getAllTypes().forEach(metaDataManager::add);
 		configuration.source().getAllCacheRoots().forEach((c) -> cacheManager.createRootMap(c));
 		configuration.source().start();
-		metaDataManager.getMetaData().stream().map(MetaObject::create).forEach(cacheManager::add);
+		metaDataManager.getMetaData().forEach(MetaObject::new);
 		configuration.source().getAllFeeders().forEach(this::startFeed);
 	}
 	

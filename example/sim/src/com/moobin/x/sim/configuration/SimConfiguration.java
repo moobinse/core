@@ -31,7 +31,7 @@ public class SimConfiguration extends AbstractMoobinConfiguration {
 				User.class);
 
 		// add-remove meta data fields
-		addMetaDataField(Country.class, "test", String.class, SimFunctions.country_test);
+		//addMetaDataField(Country.class, "test", String.class, SimFunctions.country_test);
 		removeMetaDataField(Country.class, "test");
 		
 		// cache

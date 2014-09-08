@@ -8,6 +8,8 @@ public interface MetaDataObject<T> {
 
 	Class<T> getType();
 
+	List<String> getActions();
+
 	MetaDataField<String, T> getKeyField();
 	
 	MetaDataField<String, T> getDisplayField();
@@ -33,5 +35,9 @@ public interface MetaDataObject<T> {
 	T create();
 
 	void setCacheRoot(boolean b);
+
+	default boolean hasAction(String action) {
+		return getActions().contains(action);
+	}
 
 }

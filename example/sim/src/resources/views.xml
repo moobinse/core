@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+  <root>
+    <views>
+
+      <view model="Account" action="get">
+        <div id="key-fields">
+          <property name="accountId"/>
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="organisation"/>
+        </div>
+      </view>
+
+      <view model="Account" action="add">
+        <context type="Account">$model = $context</context>
+        <context type="Member">$model.organisation = $context.memberId</context>
+        <div id="key-fields">
+          <property name="accountId"/>
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="organisation"/>
+        </div>
+      </view>
+
+      <view model="Country" action="get">
+        <div id="key-fields">
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="alpha2"/>
+          <property name="alpha3"/>
+          <property name="countryNumber"/>
+          <property name="iso3166_2"/>
+          <property name="region"/>
+          <property name="subRegion"/>
+        </div>
+      </view>
+
+      <view model="Country" action="add">
+        <context type="Country">$model = $context</context>
+        <div id="key-fields">
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="alpha2"/>
+          <property name="alpha3"/>
+          <property name="countryNumber"/>
+          <property name="iso3166_2"/>
+          <property name="region"/>
+          <property name="subRegion"/>
+        </div>
+      </view>
+
+      <view model="Currency" action="get">
+        <div id="key-fields">
+          <property name="code"/>
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="currencyNumber"/>
+          <property name="mnrUnits"/>
+        </div>
+      </view>
+
+      <view model="Currency" action="add">
+        <context type="Currency">$model = $context</context>
+        <div id="key-fields">
+          <property name="code"/>
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="currencyNumber"/>
+          <property name="mnrUnits"/>
+        </div>
+      </view>
+
+      <view model="Market" action="get">
+        <div id="key-fields">
+          <property name="id"/>
+          <property name="name"/>
+        </div>
+      </view>
+
+      <view model="Market" action="add">
+        <context type="Market">$model = $context</context>
+        <div id="key-fields">
+          <property name="id"/>
+          <property name="name"/>
+        </div>
+      </view>
+
+      <view model="MarketList" action="get">
+        <div id="key-fields">
+          <property name="id"/>
+          <property name="name"/>
+        </div>
+      </view>
+
+      <view model="MarketList" action="add">
+        <context type="MarketList">$model = $context</context>
+        <div id="key-fields">
+          <property name="id"/>
+          <property name="name"/>
+        </div>
+      </view>
+
+      <view model="Member" action="get">
+        <div id="key-fields">
+          <property name="id"/>
+          <property name="name"/>
+        </div>
+      </view>
+
+      <view model="Member" action="add">
+        <context type="Member">$model = $context</context>
+        <div id="key-fields">
+          <property name="id"/>
+          <property name="name"/>
+        </div>
+      </view>
+
+      <view model="MetaAction" action="get">
+        <div id="key-fields">
+          <property name="key"/>
+        </div>
+        <div id="simple-fields">
+          <property name="action"/>
+          <property name="resource"/>
+        </div>
+      </view>
+
+      <view model="MetaField" action="get">
+        <div id="key-fields">
+          <property name="key"/>
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="parent"/>
+          <property name="businessType"/>
+          <property name="javaType"/>
+        </div>
+      </view>
+
+      <view model="MetaObject" action="get">
+        <div id="key-fields">
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="keyField"/>
+          <property name="displayField"/>
+          <property name="cacheRoot"/>
+        </div>
+        <list name="fields" type="MetaField">
+          <property name="key"/>
+          <property name="parent"/>
+          <property name="name"/>
+          <property name="businessType"/>
+          <property name="javaType"/>
+        </list>
+        <list name="actions" type="MetaAction">
+          <property name="key"/>
+          <property name="action"/>
+          <property name="resource"/>
+        </list>
+      </view>
+
+      <view model="User" action="get">
+        <div id="key-fields">
+          <property name="id"/>
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="organisation"/>
+        </div>
+      </view>
+
+      <view model="User" action="add">
+        <context type="User">$model = $context</context>
+        <context type="Member">$model.organisation = $context.memberId</context>
+        <div id="key-fields">
+          <property name="id"/>
+          <property name="name"/>
+        </div>
+        <div id="simple-fields">
+          <property name="organisation"/>
+        </div>
+      </view>
+
+    </views>
+  </root>
