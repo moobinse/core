@@ -22,7 +22,6 @@ public interface CacheManager {
 		CacheRootMap<T> map = getRootMap((Class<T>) item.getClass());
 		if (map != null) {
 			map.add(item);
-			System.out.println(item);
 		}
 	}
 	

@@ -38,7 +38,7 @@ public class TestInput {
 	private static void load(String resource, XmlInputMapping<?> mappings) {
 		URL url = InputXmlTool.getResource(resource);
 		Document doc = InputXmlTool.getDocument(url);
-		mappings.parseDocument(doc).forEach(Core.get().getCacheManager()::add);
+		mappings.parseAndAddToCache(doc);
 	}
 
 }

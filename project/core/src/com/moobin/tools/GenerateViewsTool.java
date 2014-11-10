@@ -28,6 +28,7 @@ public abstract class GenerateViewsTool {
 		    List<MetaDataObject<?>> list = new ArrayList<>(Core.get().getMetaDataManager().getMetaData());
 		    Collections.sort(list, (a,b) -> a.getName().compareTo(b.getName()));
 			for (MetaDataObject<?> meta : list) {
+				System.out.println(meta.getType().getSimpleName());
 				generateGetViews(meta, writer);
 				generateAddViews(meta, writer);
 			}

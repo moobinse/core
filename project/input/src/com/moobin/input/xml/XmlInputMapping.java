@@ -2,42 +2,26 @@ package com.moobin.input.xml;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.moobin.cache.CacheManager;
 import com.moobin.core.Core;
-import com.moobin.meta.MetaDataField;
 import com.moobin.meta.MetaDataObject;
 import com.moobin.tools.InputXmlTool;
 
 public class XmlInputMapping<T> {
 
 	private Class<T> type;
-	private Map<String, FieldMapping> fieldMappings = new HashMap<>();
+	private List<AbstractFieldMapping<T>> mappings = new ArrayList<>();
 	private MetaDataObject<T> meta;
 	private String xpath;
-
-	private class FieldMapping {
-
-		final String xpath;
-		final MetaDataField<?, T> metaField;
-		
-		public FieldMapping(String field, String xpath) {
-			this.xpath = xpath;
-			this.metaField = meta.getField(field);
-		}
-		
-		@Override
-		public String toString() {
-			return "xpath mapping " + xpath + " -> " + metaField;
-		}
-		
-	}
 	
 	protected XmlInputMapping() {
 		// dummy object, for instantiating EntityMaps
@@ -49,9 +33,32 @@ public class XmlInputMapping<T> {
 		meta = Core.get().getMetaDataManager().getMetaData(type);
 	}
 	
-	public XmlInputMapping<T> map(String field, String xpath) {
-		fieldMappings.put(field, new FieldMapping(field, xpath));
-		return this;
+	public void mapXpath(String field, String xpath) {
+		mappings.add(new FieldXpathExpression<T>(meta.getField(field), xpath));
+	}
+
+	public void mapAttribute(String field) {
+		mapAttribute(field, field);
+	}
+	
+	public void mapAttribute(String field, String xmlAttribute) {
+		mappings.add(new FieldAttribute<T>(meta.getField(field), xmlAttribute));
+	}
+
+	public void mapTextElement(String field, String xmlElementName) {
+		mappings.add(new FieldXmlElement<T>(meta.getField(field), xmlElementName));
+	}
+	
+	public void mapFunction(String field, Function<T, String> function) {
+		mappings.add(new FieldFunction<T>(meta.getField(field), function));
+	}
+	
+	public void mapFunction(String field, BiFunction<T, Element, String> function) {
+		mappings.add(new FieldBiFunction<T>(meta.getField(field), function));
+	}
+	
+	public void mapTrim(Consumer<T> consumer) {
+		mappings.add(new FieldTrimming<T>(consumer));
 	}
 
 	public Class<T> getType() {
@@ -67,14 +74,8 @@ public class XmlInputMapping<T> {
 	
 	T inspect(Element element) {
 		T item = meta.create();
-		fieldMappings.values().forEach((fm) -> set(item, fm, InputXmlTool.getValue(element, fm.xpath)));
+		mappings.forEach((m) -> m.apply(element, item));
 		return item;
-	}
-	
-	private void set(T item, FieldMapping fm, String value) {
-		if (fm.metaField != null) {
-			fm.metaField.set(item, value);
-		}
 	}
 	
 	public static <T> XmlInputMapping<T> createMapping(Class<T> type, String xpath) {
@@ -83,6 +84,11 @@ public class XmlInputMapping<T> {
 	
 	public Stream<T> parseDocument(Document doc) {
 		return inspect(doc).stream();
+	}
+	
+	public void parseAndAddToCache(Document doc) {
+		CacheManager cache = Core.get().getCacheManager();
+		parseDocument(doc).forEach(cache::add);
 	}
 
 }
