@@ -68,7 +68,7 @@ public class XmlInputMapping<T> {
 
 	private Collection<T> inspect(Document doc) {
 		List<T> list = new ArrayList<>();
-		InputXmlTool.getNodes(doc, xpath).forEach((e) -> list.add(inspect(e)));
+		InputXmlTool.getElementStream(doc, xpath).forEach((e) -> list.add(inspect(e)));
 		return list;
 	}
 	

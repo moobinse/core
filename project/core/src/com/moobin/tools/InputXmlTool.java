@@ -3,9 +3,8 @@ package com.moobin.tools;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -60,19 +59,18 @@ public class InputXmlTool {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public static Collection<Element> getNodes(Document doc, String xpath) {
+	public static Stream<Element> getElementStream(Document doc, String xpath) {
 		NodeList nodes;
 		try {
 			nodes = XPathAPI.selectNodeList(doc.getDocumentElement(), xpath);
 			if (nodes.getLength() == 0) {
-				return Collections.EMPTY_LIST;
+				return Stream.empty();
 			}
 			List<Element> elements = new ArrayList<Element>();
 			for (int i = 0; i < nodes.getLength(); i++) {
 				elements.add((Element) nodes.item(i));
 			}
-			return elements;
+			return elements.stream();
 		} catch (TransformerException e) {
 			throw new MoobinException(e);
 		}
